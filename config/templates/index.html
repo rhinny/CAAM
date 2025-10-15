@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%} CREDITOS ASISTENCIA ADULTO MAYOR {%endblock%}</title>
+</head>
+<body>
+    <main>
+        {%block content%}
+        CUERPO
+        {%endblock%}
+    </main>
+
+    <div class="botones">
+        <a href = "{%url 'home'%}" class="button">Ir a inicio</a>
+        <br>
+        <a href="{%url 'registro'%}" class="button">Ir a registro</a>
+    </div>
+</body>
+</html>
+
+{%comment%}
+Aquí están los demás urls. Primero hay que crear las views y toda la cosa antes de
+poner estos botones pq me tiraba error de que no encontraba el login_adultoM y link_video o algo así.
+        <br>
+        <a href = "{%url 'registro_estudiante'%}" class="button">Soy estudiante</a>
+        <br>
+        <a href = "{%url 'registro_adultoM'%}" class="button">Soy adulto</a>
+        <br>
+        <a href = "{%url 'login_adultoM'%}" class="button">Soy adulto</a>
+        <br>
+        <a href = "{%url 'link_video'%}" class="button">Video tutorial</a>
+{%endcomment%}

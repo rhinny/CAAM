@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{%block title %}
+    LOGIN
+{% endblock %}
+{% block content %}
+    <h1>Inicio de sesión</h1>
+    <form action="/usuarios/login/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="form-submit">Entrar</button>
+    </form>
+{% endblock %}

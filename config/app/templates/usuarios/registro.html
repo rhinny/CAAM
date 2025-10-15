@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+{%block title %}
+    REGISTRO 
+{% endblock %}
+{% block content %}
+    <h1>Crea tu cuenta</h1>
+    <form action="/usuarios/registro/" method="post">
+        {% csrf_token %}
+        {{ adicional_form }}
+        {{ form }}
+        <button class="form-submit">Crear</button>
+    </form>
+{% endblock %}
