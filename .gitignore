@@ -1,0 +1,40 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# Virtual environment
+venv/
+env/
+.env/
+myvenv/
+
+# Database
+db.sqlite3
+*.sqlite3-journal
+
+# Media and Static Files (if managed locally and not intended for version control)
+media/
+static_collected/ # If using collectstatic locally
+
+# Log files
+*.log
+
+# IDE-specific files
+.idea/ # PyCharm
+.vscode/ # VS Code
+*.sublime-workspace
+*.sublime-project
+
+# OS-specific files
+.DS_Store # macOS
+
+# Sensitive information (e.g., local settings, secret keys)
+local_settings.py
+.env # If using a .env file for environment variables
+
+# Django specific
+*.pot
+*.mo
+*.po
