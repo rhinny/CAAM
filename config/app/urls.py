@@ -7,4 +7,5 @@ urlpatterns = [#path('registro/estudiante', views.registro_estudiante, name='reg
                path('', views.home, name='home'),
                path('usuarios/registro/', views.registro, name="registro"),
                path('usuarios/login/', views.login_view, name="login"),
+               path('usuarios/comuna/', views.comuna, name = 'comuna'),
                ]

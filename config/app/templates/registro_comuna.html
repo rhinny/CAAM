@@ -1,0 +1,11 @@
+{%extends "index.html"%}
+{%block title%} COMUNA {%endblock%}
+
+{%block content%}
+    <h1>Registra tu comuna</h1>
+    <form method = "POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button type="submit">Entrar</button>
+    </form>
+{%endblock%}

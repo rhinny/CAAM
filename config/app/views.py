@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
+from .models import Usuarios
 
 def home(request):
     contexto = {'texto':"Home"}
@@ -26,6 +27,19 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, "usuarios/login.html", {'form':form})
+
+def comuna(request):
+    if request.method == "POST":
+        form = ComunaForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            if Usuarios.tipo == "ESTUDIANTE":
+                return redirect("home") #debería redirigir a selección de fechas disponibles
+            else:
+                return redirect("home") #debería redirigir a /adultomayor (según diseño)
+    else:
+        form = ComunaForm(instance=request.user)
+    return render(request, "registro_comuna.html", {'form':form})
 
 '''
 def registro_estudiante(request):

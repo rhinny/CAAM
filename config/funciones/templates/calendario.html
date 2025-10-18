@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Calendario</title>
+    <style>
+        table { border-collapse: collapse; width: 80%; margin: auto; }
+        th, td { border: 1px solid #aaa; padding: 10px; text-align: center; }
+        .evento { background-color: #def; border-radius: 4px; padding: 2px; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;">Calendario de {{ mes }}</h2>
+    <table>
+        <tr>
+            {% for dia in calendario %}
+                <td>
+                    <strong>{{ dia.fecha.day }}</strong><br>
+                    {% for e in dia.eventos %}
+                        <div class="evento">{{ e.nombre_persona }} ({{ e.hora }})</div>
+                    {% empty %}
+                        <small>—</small>
+                    {% endfor %}
+                </td>
+                {% if forloop.counter|divisibleby:7 %}
+                    </tr><tr>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
+</body>
+</html>
