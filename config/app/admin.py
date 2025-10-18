@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.Usuarios)
 admin.site.register(models.Comuna)
+admin.site.register(models.Area)

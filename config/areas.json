@@ -1,0 +1,10 @@
+[
+{"model": "app.area", "fields": {"nombre": "Salud"}},
+{"model": "app.area", "fields": {"nombre": "Transporte"}},
+{"model": "app.area", "fields": {"nombre": "Encargos"}},
+{"model": "app.area", "fields": {"nombre": "Acompañamiento"}},
+{"model": "app.area", "fields": {"nombre": "Limpieza hogar"}},
+{"model": "app.area", "fields": {"nombre": "Mascotas"}},
+{"model": "app.area", "fields": {"nombre": "Clases"}}
+
+]

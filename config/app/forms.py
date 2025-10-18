@@ -22,6 +22,19 @@ class ComunaForm(forms.ModelForm):
         model = Usuarios
         fields = ['comuna']
 
+class SeleccionForm(forms.Form): 
+    areas = forms.ModelMultipleChoiceField(
+        queryset=Area.objects.all(),
+        widget= forms.CheckboxSelectMultiple,
+        required=True,
+        label = "Selecciona al menos tres area de apoyo:")
+    
+    def clean_areas(self):
+        cantidad = self.cleaned_data.get('areas')
+        if not cantidad or len(cantidad) < 3:
+            raise forms.ValidationError("Seleccione al menos tres areas!")
+        return cantidad
+
 '''
 formulario para que pida email o username
 class CustomAuthenticationForm(AuthenticationForm):

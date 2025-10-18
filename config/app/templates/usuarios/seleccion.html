@@ -1,0 +1,18 @@
+{%extends 'index.html' %}
+{%block title%} SELECCION {%endblock%}
+
+{%block content%}
+    <h1>Selecciona areas de apoyo</h1>
+    <form method= "POST">
+        {% csrf_token %}
+        {{form.non_field_errors}}
+        <div>
+            {{form.areas.label_tag}}
+            {{form.areas}}
+            {%for error in form.areas.errors%}
+                <p style="color: rgb(179, 0, 48);">{{error}}</p>
+            {%endfor%}
+        </div>
+        <button type="submit"> Siguiente </button>
+    </form>
+{%endblock%}

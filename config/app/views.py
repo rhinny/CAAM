@@ -13,7 +13,7 @@ def registro(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             login(request, form.save())
-            return redirect("home")
+            return redirect("seleccion")
     else:
         form = CustomUserCreationForm()
     return render(request, "usuarios/registro.html", {'form':form})
@@ -40,6 +40,17 @@ def comuna(request):
     else:
         form = ComunaForm(instance=request.user)
     return render(request, "registro_comuna.html", {'form':form})
+
+def seleccion(request):
+    if request.method == "POST":
+        form = SeleccionForm(request.POST)
+        if form.is_valid():
+            request.user.areas.set(form.cleaned_data['areas'])
+            return redirect ("home") # Redirigir a comuna
+    else:
+        form = SeleccionForm(request.POST)
+    return render(request, "usuarios/seleccion.html", {'form':form})
+
 
 '''
 def registro_estudiante(request):
