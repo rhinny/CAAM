@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{%block title %}
+    COMUNA 
+{% endblock %}
+{% block content %}
+    <h1>Selecciona tu comuna, querido estudiante xd</h1>
+    <form action="/usuarios/comuna/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button class="form-submit">Aceptar</button>
+    </form>
+{% endblock %}

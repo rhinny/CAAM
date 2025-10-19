@@ -1,17 +1,7 @@
 from django import forms
 from .models import *
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-'''
-class EstudianteForm(forms.ModelForm):
-    class Meta:
-        model = Usuarios
-        fields = ['tipo','rut','username','email', 'password']
+from django.contrib.auth.forms import UserCreationForm
 
-class AdultoMForm(forms.ModelForm):
-    class Meta:
-        model = Usuarios
-        fields = ['tipo','rut', 'username', 'email','password']
-'''
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = Usuarios
@@ -34,11 +24,3 @@ class SeleccionForm(forms.Form):
         if not cantidad or len(cantidad) < 3:
             raise forms.ValidationError("Seleccione al menos tres areas!")
         return cantidad
-
-'''
-formulario para que pida email o username
-class CustomAuthenticationForm(AuthenticationForm):
-    class Meta:
-        model = Usuarios
-        fields = ['email', 'password']
-'''

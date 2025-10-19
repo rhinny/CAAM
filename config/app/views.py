@@ -33,43 +33,26 @@ def comuna(request):
         form = ComunaForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            if Usuarios.tipo == "ESTUDIANTE":
+            if request.user.tipo == "ESTUDIANTE":
                 return redirect("home") #debería redirigir a selección de fechas disponibles
             else:
                 return redirect("home") #debería redirigir a /adultomayor (según diseño)
     else:
         form = ComunaForm(instance=request.user)
-    return render(request, "registro_comuna.html", {'form':form})
+        form.fields['comuna'].queryset = Comuna.objects.all().order_by('nombre')
+    if request.user.tipo == "ESTUDIANTE":
+        return render(request, "usuarios/estudiantes/comuna_disponibilidad.html", {'form':form})
+    else:
+        return render(request, "usuarios/adultom/comuna.html", {'form':form})
 
 def seleccion(request):
     if request.method == "POST":
         form = SeleccionForm(request.POST)
         if form.is_valid():
             request.user.areas.set(form.cleaned_data['areas'])
-            return redirect ("home") # Redirigir a comuna
+            return redirect ("comuna") # Redirigir a comuna
     else:
         form = SeleccionForm(request.POST)
     return render(request, "usuarios/seleccion.html", {'form':form})
 
 
-'''
-def registro_estudiante(request):
-    if request.method == "POST":
-        form = EstudianteForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('registro_estudiante') #hasta ahora, redirige al index ,deberia dirigir a 'seleccion de apoyo'
-    else:
-        form = EstudianteForm()
-    return render(request, 'registro_estudiante.html',{'form':form})
-
-def registro_adultoM(request):
-    if request.method == "POST":
-        form = AdultoMForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('registro_adultoM') #hasta ahora, redirige al index ,deberia dirigir a 'seleccion de apoyo'
-    else:
-        form = AdultoMForm()
-    return render(request, 'registro_adultoM.html',{'form':form})
-'''
