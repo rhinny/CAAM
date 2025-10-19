@@ -3,7 +3,61 @@
     COMUNA 
 {% endblock %}
 {% block content %}
-    <h1>Selecciona tu comuna, querido estudiante xd</h1>
+    <h1>Selecciona tu comuna y las fechas disponibles para ayudar, querido estudiante :D</h1>
+
+    <!--calendario-->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.19/index.global.min.js"></script>
+
+<div id="calendar" style="max-width: 700px; margin: 40px auto; height: 400px;"></div>
+
+<script>
+const csrfToken = '{{ csrf_token }}';
+
+document.addEventListener('DOMContentLoaded', function() {
+  var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
+    initialView: 'dayGridMonth',
+    dateClick: function(info) {
+      var fecha = info.dateStr;
+      var eventoExistente = calendar.getEvents().find(e => e.startStr === fecha);
+
+      if (eventoExistente) {
+        eventoExistente.remove();
+
+        fetch('/borrar_fecha/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+          },
+          body: 'fecha=' + encodeURIComponent(fecha)
+        });
+      } else {
+        calendar.addEvent({
+          start: fecha,
+          allDay: true,
+          display: 'background',
+          backgroundColor: '#4caf50'
+        });
+
+        fetch('/guardar_fechas/', {
+          method: 'POST',
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrfToken
+          },
+          body: 'fecha=' + encodeURIComponent(fecha)
+        });
+      }
+    }
+  });
+
+  calendar.render();
+});
+</script>
+
+
+
+    <!--formulario comuna-->
     <form action="/usuarios/comuna/" method="post">
         {% csrf_token %}
         {{ form }}
