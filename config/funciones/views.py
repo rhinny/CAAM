@@ -26,22 +26,23 @@ def calendario(request):
 
     return render(request, "calendario.html", {"calendario": calendario, "mes": hoy.strftime("%B")})
 
-@csrf_exempt
+
+#@csrf_exempt
 def guardar_fechas(request):
     if request.method == "POST":
         fecha = request.POST.get('fecha')
         if fecha:
             fecha_obj = datetime.strptime(fecha, '%Y-%m-%d').date()
-            FechasDisponibles.objects.get_or_create(estudiante=request.user, fecha=fecha_obj)
+            FechasDisponibles.objects.get_or_create(usuario=request.user, fecha=fecha_obj)
             return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'})
 
-@csrf_exempt
+#@csrf_exempt
 def borrar_fechas(request):
     if request.method == "POST":
         fecha = request.POST.get('fecha')
         if fecha:
             fecha_obj = datetime.strptime(fecha, '%Y-%m-%d').date()
-            FechasDisponibles.objects.filter(estudiante=request.user, fecha=fecha_obj).delete()
+            FechasDisponibles.objects.filter(usuario=request.user, fecha=fecha_obj).delete()
             return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'})

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (eventoExistente) {
         eventoExistente.remove();
 
-        fetch('/borrar_fecha/', {
+        fetch('/borrar_fechas/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         fetch('/guardar_fechas/', {
           method: 'POST',
-            headers: {
+          headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'X-CSRFToken': csrfToken
           },
