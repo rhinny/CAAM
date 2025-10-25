@@ -65,6 +65,7 @@ def publicar(request):
         if publi_form.is_valid() and seleccion_form.is_valid() and comuna_form.is_valid:
             Publi.objects.filter(usuario=request.user).delete() #borrar el post anterior
             publi = publi_form.save(commit=False)
+            publi.usuario = usuario
             publi.save()
             comuna_form.save()
             usuario.areas.set(seleccion_form.cleaned_data['areas'])
@@ -117,7 +118,8 @@ def perfil_estudiante(request):
         return render(request, "no_autorizado.html")
     publi = Publi.objects.filter(usuario=usuario).first()
     fechas = FechasDisponibles.objects.filter(usuario=usuario).order_by("fecha")
+
     return render(request, "perfil/perfil_estudiante.html", {
         "publi": publi,
-        "fechas": fechas
-    })
+        "fechas": fechas,
+        "usuario": usuario,})

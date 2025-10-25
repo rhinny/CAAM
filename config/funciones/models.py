@@ -16,7 +16,7 @@ class FechasDisponibles(models.Model):
 
 class Publi(models.Model):
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True, blank=True)
-    fecha = models.DateField(default=timezone.now)
+    fecha = models.DateTimeField(auto_now_add=True)
     titulo = models.TextField(max_length=50)
     descripcion = models.TextField(max_length=200)
     

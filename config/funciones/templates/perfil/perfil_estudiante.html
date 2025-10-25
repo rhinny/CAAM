@@ -1,22 +1,53 @@
-{% extends "index.html" %}
+
 {% block content %}
 <div class="container mt-4">
     <h2>Tu perfil</h2>
+<!-- Publicación actual -->
+    <div class="card mt-4">
+        <div class="card-header">Tu publicación</div>
+        <div class="card-body">
+            {% if publi %}
+                <h5 class="card-title">{{ publi.titulo }}</h5>
+                <p class="card-text">{{ publi.descripcion }}</p>
 
-    {% if publi %}
-        <div class="card mb-4">
-            <div class="card-header">Publicación</div>
-            <div class="card-body">
-                <h4>{{ publi.titulo }}</h4>
-                <p>{{ publi.descripcion }}</p>
-                <a href="{% url 'publicar' %}" class="btn btn-outline-primary">Editar perfil</a>
-            </div>
+                <a href="{% url 'publicar' %}" class="btn btn-outline-primary mt-2">Editar publicación</a>
+            {% else %}
+                <p>No has publicado tu perfil aún.</p>
+                <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
+            {% endif %}
         </div>
-    {% else %}
-        <p>No has publicado tu perfil aún.</p>
-        <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
+    </div>
+
+<!-- Áreas seleccionadas -->
+    {% if usuario.areas.all %}
+    <div class="card mt-4">
+        <div class="card-header">Áreas seleccionadas:</div>
+        <div class="card-body">
+            {% if usuario.areas.all %}
+                <ul class="list-group">
+                    {% for area in usuario.areas.all %}
+                        <li class="list-group-item">{{ area.nombre }}</li>
+            {% endfor %}
+                </ul>
+            {% else %}
+                <p>No has seleccionado áreas aún.</p>
+            {% endif %}
+        </div>
+    </div>
     {% endif %}
 
+<!-- Comuna seleccionada -->
+    {% if usuario.comuna %}
+    <div class="card mt-4">
+        <div class="card-header">Comuna seleccionada:</div>
+        <div class="card-body">
+            
+           
+        </div>
+    </div>
+    {% endif %}
+
+<!--Ver fechas-->
     <div class="card mb-4">
         <div class="card-header">Fechas disponibles</div>
         <div class="card-body">
