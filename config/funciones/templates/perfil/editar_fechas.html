@@ -1,0 +1,75 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Edita tus fechas disponibles</h2>
+
+    <div id="calendar" style="max-width: 1100px; margin: 0 auto;"></div>
+
+    <div class="mt-4 text-center">
+        <a href="{% url 'perfil_estudiante' %}" class="btn btn-secondary me-2">Guardar cambios</a>
+        <a href="{% url 'publicar' %}" class="btn btn-primary">Editar perfil</a>
+    </div>
+</div>
+
+<!-- FullCalendar CSS & JS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+<script>
+const csrftoken = '{{ csrf_token }}';
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        events: '/fechas/',
+
+        // Añadir más
+        dateClick: function(info) {
+            var fecha = info.dateStr;
+            var existe = calendar.getEvents().find(ev => ev.startStr === fecha);
+
+            if (!existe) {
+                calendar.addEvent({
+                    title: "Disponible",
+                    start: fecha,
+                    allDay: true
+                });
+
+                fetch('/guardar_fechas/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: 'fecha=' + encodeURIComponent(fecha)
+                });
+            }
+        },
+
+        // quitar
+        eventClick: function(info) {
+            var fecha = info.event.startStr;
+            var eventExistente = calendar.getEvents().find(ev => ev.startStr === fecha);
+
+            if (eventExistente) {
+                eventExistente.remove();
+
+                fetch('/borrar_fechas/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: 'fecha=' + encodeURIComponent(fecha)
+                });
+            }
+        }
+    });
+
+    calendar.render();
+});
+</script>
+{% endblock %}
+

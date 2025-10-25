@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Tu perfil</h2>
+
+    {% if publi %}
+        <div class="card mb-4">
+            <div class="card-header">Publicación</div>
+            <div class="card-body">
+                <h4>{{ publi.titulo }}</h4>
+                <p>{{ publi.descripcion }}</p>
+                <a href="{% url 'publicar' %}" class="btn btn-outline-primary">Editar perfil</a>
+            </div>
+        </div>
+    {% else %}
+        <p>No has publicado tu perfil aún.</p>
+        <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
+    {% endif %}
+
+    <div class="card mb-4">
+        <div class="card-header">Fechas disponibles</div>
+        <div class="card-body">
+            {% if fechas %}
+                <ul>
+                    {% for fecha in fechas %}
+                        <li>{{ fecha.fecha|date:"l j F Y" }}</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'editar_fechas' %}" class="btn btn-outline-secondary">Editar fechas</a>
+            {% else %}
+                <p>No has seleccionado fechas aún.</p>
+                <a href="{% url 'editar_fechas' %}" class="btn btn-secondary">Seleccionar fechas</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

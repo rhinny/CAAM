@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from datetime import date, timedelta, datetime
-from .models import FechasDisponibles
+from .models import FechasDisponibles, Publi
 from django.views.decorators.csrf import csrf_exempt
+from app.models import Usuarios
+from .forms import *
+from django.contrib.auth.decorators import login_required
+from app.forms import *
+from app.models import *
 
 # Create your views here.
 
@@ -46,3 +51,73 @@ def borrar_fechas(request):
             FechasDisponibles.objects.filter(usuario=request.user, fecha=fecha_obj).delete()
             return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'})
+
+@login_required
+def publicar(request):
+    usuario = request.user
+    if not usuario.es_estudiante():
+        return render(request, 'no_autorizado.html')
+    
+    if request.method=='POST':
+        comuna_form = ComunaForm(request.POST, instance=usuario)
+        seleccion_form = SeleccionForm(request.POST)
+        publi_form = PubliForm(request.POST)
+        if publi_form.is_valid() and seleccion_form.is_valid() and comuna_form.is_valid:
+            Publi.objects.filter(usuario=request.user).delete() #borrar el post anterior
+            publi = publi_form.save(commit=False)
+            publi.save()
+            comuna_form.save()
+            usuario.areas.set(seleccion_form.cleaned_data['areas'])
+            return redirect ('perfil_estudiante') # perfil estudiantes
+    else:
+        publi_form = PubliForm(initial={'titulo':usuario.username})
+        comuna_form = ComunaForm(instance=usuario)
+        seleccion_form = SeleccionForm(initial={'areas':usuario.areas.all()})
+    return render(request, 'publicar.html', {"publi_form": publi_form,
+        "comuna_form": comuna_form,
+        "seleccion_form": seleccion_form})
+
+@login_required
+def editar_fechas(request):
+    usuario = request.user
+    if not usuario.es_estudiante():
+        return render(request, "no_autorizado.html")
+    return render(request, "perfil/editar_fechas.html")
+
+def fechas_usuario(request):
+    usuario = request.user
+    fechas = FechasDisponibles.objects.filter(usuario=usuario)
+    eventos = [{
+            "title": "Disponible",
+            "start": fecha.fecha.isoformat(),
+            "allDay": True}
+        for fecha in fechas
+    ]
+    return JsonResponse(eventos, safe=False)
+
+
+@csrf_exempt
+@login_required
+def borrar_fecha(request):
+    if request.method == "POST":
+        fecha_str = request.POST.get("fecha")
+        try:
+            fecha_obj = datetime.strptime(fecha_str, "%Y-%m-%d").date()
+            FechasDisponibles.objects.filter(usuario=request.user, fecha=fecha_obj).delete()
+            return JsonResponse({"status": "ok"})
+        except ValueError:
+            return JsonResponse({"status": "invalid date"}, status=400)
+    return JsonResponse({"status": "invalid method"}, status=405)
+
+
+@login_required
+def perfil_estudiante(request):
+    usuario = request.user
+    if not usuario.es_estudiante():
+        return render(request, "no_autorizado.html")
+    publi = Publi.objects.filter(usuario=usuario).first()
+    fechas = FechasDisponibles.objects.filter(usuario=usuario).order_by("fecha")
+    return render(request, "perfil/perfil_estudiante.html", {
+        "publi": publi,
+        "fechas": fechas
+    })

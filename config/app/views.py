@@ -3,6 +3,7 @@ from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 from .models import Usuarios
+from funciones.urls import *
 
 def home(request):
     contexto = {'texto':"Home"}
@@ -23,7 +24,10 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            return redirect("home")
+            if Usuarios.tipo == "ESTUDIANTE":
+                return redirect("perfil_estudiante") # Redirigir al home de estudiante
+            else:
+                return redirect("home") # Redirigir al home de adultom
     else:
         form = AuthenticationForm()
     return render(request, "usuarios/login.html", {'form':form})
@@ -34,7 +38,7 @@ def comuna(request):
         if form.is_valid():
             form.save()
             if request.user.tipo == "ESTUDIANTE":
-                return redirect("home") #debería redirigir a selección de fechas disponibles
+                return redirect("publicar") #debería redirigir a selección de fechas disponibles
             else:
                 return redirect("home") #debería redirigir a /adultomayor (según diseño)
     else:

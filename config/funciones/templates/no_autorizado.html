@@ -1,0 +1,9 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-5 text-center">
+    <h2 class="text-danger">Acceso no autorizado</h2>
+    <p class="lead">Lo sentimos, esta sección está reservada para estudiantes.</p>
+    <p>Si crees que esto es un error, por favor envía un correo a blank@gmail.com o revisa tu perfil.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary mt-3">Volver al inicio</a>
+</div>
+{% endblock %}

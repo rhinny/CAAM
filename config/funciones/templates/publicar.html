@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Publica tu perfil como estudiante</h2>
+    <p class="text-muted">Tu comuna y áreas de interés actuales están preseleccionadas. Puedes editarlas si lo deseas.</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="card mb-4">
+            <div class="card-header">Información de tu publicación</div>
+            <div class="card-body">
+                {{ publi_form.titulo.label_tag }} {{ publi_form.titulo }}
+                {{ publi_form.descripcion.label_tag }} {{ publi_form.descripcion }}
+                {% for field in publi_form %}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Tu comuna</div>
+            <div class="card-body">
+                {{ comuna_form.comuna.label_tag }} {{ comuna_form.comuna }}
+                {% for error in comuna_form.comuna.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Áreas de interés</div>
+            <div class="card-body">
+                {{ seleccion_form.areas.label_tag }}
+                {{ seleccion_form.areas }}
+                {% for error in seleccion_form.areas.errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar y publicar</button>
+    </form>
+</div>
+{% endblock %}
