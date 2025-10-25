@@ -98,7 +98,7 @@ def fechas_usuario(request):
 
 @csrf_exempt
 @login_required
-def borrar_fecha(request):
+def borrar_fecha(request): # repite la función de borrar fechas pero para editarlas luego, no me dejaba hacerlo de otra forma :(
     if request.method == "POST":
         fecha_str = request.POST.get("fecha")
         try:

@@ -24,7 +24,8 @@ def login_view(request):
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             login(request, form.get_user())
-            if Usuarios.tipo == "ESTUDIANTE":
+            user = form.get_user()
+            if user.tipo == 'ESTUDIANTE':
                 return redirect("perfil_estudiante") # Redirigir al home de estudiante
             else:
                 return redirect("home") # Redirigir al home de adultom
