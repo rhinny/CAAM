@@ -37,15 +37,18 @@
     {% endif %}
 
 <!-- Comuna seleccionada -->
-    {% if usuario.comuna %}
     <div class="card mt-4">
-        <div class="card-header">Comuna seleccionada:</div>
+        <div class="card-header">Comuna seleccionada</div>
         <div class="card-body">
-            
-           
+            {% if usuario.comuna %}
+                <ul class="list-group">
+                    <li class="list-group-item">{{ usuario.comuna.nombre }}</li>
+                </ul>
+            {% else %}
+                <p>No has seleccionado comuna aún.</p>
+            {% endif %}
         </div>
     </div>
-    {% endif %}
 
 <!--Ver fechas-->
     <div class="card mb-4">
