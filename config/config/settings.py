@@ -123,3 +123,14 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "app.Usuarios"
+
+
+# URL para servir los archivos estáticos
+STATIC_URL = '/static/'
+
+# Carpeta donde Django recopilará todos los archivos estáticos cuando ejecutes collectstatic
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Carpeta(s) adicionales donde buscará archivos estáticos (además de las apps)
+STATICFILES_DIRS = [BASE_DIR  / "static"]
+

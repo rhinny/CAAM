@@ -17,6 +17,7 @@ db.sqlite3
 # Media and Static Files (if managed locally and not intended for version control)
 media/
 static_collected/ # If using collectstatic locally
+staticfiles/
 
 # Log files
 *.log

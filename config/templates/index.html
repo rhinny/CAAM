@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load static %}
+
+
 <head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{%block title%} CREDITOS ASISTENCIA ADULTO MAYOR {%endblock%}</title>
 </head>
 <body>
@@ -12,13 +19,32 @@
         {%endblock%}
     </main>
 
+    <header class="header">
+
+        <div class="logo-container"> <img src="images/logo1.png" class="logo" alt="" srcset=""></div>
+        <div class="indice">
+            <a href='{% url "home" %}'>inicio</a>
+            <a href="#about">sobre nosotros</a>
+            <a href="#tutorial">video tutorial</a>
+        </div>
+    </header>
+
     <div class="botones">
-        <a href = "{%url 'home'%}" class="button">Ir a inicio</a>
+        <button onclick="window.location.href='{% url 'home' %}'" class="button">Ir a inicio</button>
         <br>
-        <a href="{%url 'registro'%}" class="button">Ir a registro</a>
-        <br>
-        <a href="{%url 'login'%}" class="button">Ir a iniciar sesión</a>
+        <div class="card button-container"></div>
+            <button onclick="window.location.href='{% url 'registro' %}'" class="primary-button" id="boton-registro">Ir a registro</button>
+            <button onclick="window.location.href='{% url 'login' %}'" class="secondary-button" id="boton-inicio-sesion">Ir a iniciar sesión</button>
+        </div>
     </div>
+    <div class="card video-tutorial" id="tutorial">
+            <h1 class="texto-tutorial">Tutorial</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/fcmYrba9ZXY?si=1fntBMvuZyjBYPv-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="card about-us" id="about">
+            <h1 class="about-us-title">Sobre nosotros</h1>
+            <h4 class="abut-us-text">Hola somos los power computines y somos un equipo y ayudamos a los adultos mayores con nuestra app y eso es lo que hacemos esto es texto sobre nosotros espero que les guste estoy rellenando con mucho texto que opinan. mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto </h4>
+        </div>
 </body>
 </html>
 

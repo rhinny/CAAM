@@ -1,0 +1,156 @@
+button {
+  cursor:pointer;
+  border-radius: 7vw;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  transition: all 0.5s ease;
+  border-color: hsl(239, 98%, 67%);
+  border-width: 0.25rem;
+}
+button:hover {
+  background-color: hsl(239, 98%, 67%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
+  border-color: hsl(0, 0%, 100%);
+}
+button:active {
+  background-color: hsl(231, 58%, 33%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 50ms;
+  border-color: hsl(0, 0%, 100%);
+}
+
+iframe {
+  padding: 3rem;
+  width: 60vw;
+  height: 40vw;
+  border-radius: 4rem;
+}
+.primary-button {
+  width: 30vw;
+  height: 30vw;
+  max-height: 30vw;
+  background-image: url("images/user.png");
+  background-repeat: no-repeat;
+  background-position: center 2vw;
+  background-size: 17vw;
+  padding-top: 20vw;
+  font-size: 1.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: hsl(239, 98%, 67%);
+}
+.secondary-button {
+  width: 30vw;
+  height: 30vw;
+  max-height: 30vw;
+  background-image: url("images/old-people.png");
+  background-repeat: no-repeat;
+  background-position: center 2vw;
+  background-size: 17vw;
+  padding-top: 20vw;
+  font-size: 1.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: hsl(239, 98%, 67%);
+}
+.button-container {
+  justify-content: center;
+  display:flex;
+  align-items: center;
+  column-gap: 5vw;
+}
+
+main {
+  margin-top: 20vh;
+  width: 100%;
+}
+
+.video-tutorial {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  color: #31353a;
+  align-items: center;
+  font-size: 2.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+}
+.texto-tutorial {
+  margin-bottom: 0;
+}
+.about-us {
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  color: #31353a;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+.about-us-title {
+  font-weight: bolder;
+  font-size: 4rem;
+}
+.about-us-text {
+  font-size: 0.5rem;
+  font-weight: lighter;
+  
+}
+
+.logo {
+  width: 12vh;
+}
+
+.indice {
+  display: flex;
+  flex-direction: row-reverse;
+  column-gap: 2rem;
+  align-items: center;
+  padding-right: 3rem;
+}
+.indice div {
+}
+a {
+  text-decoration: none;
+  font-size: 2.25vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(73, 91, 255);
+  height: 6vh;
+  width: 21vw;
+  border-radius: 1vh;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  transition: all 0.25s ease;
+}
+a:hover {
+  background-color: hsl(41, 100%, 55%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 29px 0px;
+}
+a:active {
+  background-color: hsl(39, 60%, 30%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  transform: translateY(2px);
+  transition: 50ms;
+}
+.header {
+  background-color: #0d266b;
+  display:flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 15vh;
+  margin-left: 0vw;
+  margin-top: 0vw;
+}
