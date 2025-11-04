@@ -123,3 +123,24 @@ def perfil_estudiante(request):
         "publi": publi,
         "fechas": fechas,
         "usuario": usuario,})
+
+#función para que muestre los perfiles de los estudiantes a los adultos mayores
+def elegir(request):
+    #...
+    return
+
+#muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita
+#envíar notificación al estudiante
+def agendar_citas(request):
+    #...
+    return
+
+#muestra las citas que tienen agendadas tanto los adultos mayores como los estudiantes
+def ver_citas(request):
+    #...
+    return
+
+#cuando se cumplan cierta cantidad de citas el estudiante puede imprimir un certificado
+def certificados(request):
+    #...
+    return
