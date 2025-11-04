@@ -1,9 +1,31 @@
 {%extends "index.html"%}
 
-{%block title%} HOME {%endblock%}
+{%block title%} CREDITOS ASISTENCIA ADULTO MAYOR {%endblock%}
+
 
 {%block content%}
-    <div class="texto">
-        <h3>{{texto}} </h3>
+<header class="header">
+    <div class="indice">
+        <a href="#about">sobre nosotros</a>
+        <a href="#tutorial">video tutorial</a>
     </div>
+
+</header>
+
+<div class="botones">
+    <div class="card button-container">
+                <button onclick="window.location.href='{% url 'registro' %}'" class="primary-button" id="boton-registro">Ir a registro</button>
+                <button onclick="window.location.href='{% url 'login' %}'" class="secondary-button" id="boton-inicio-sesion">Ir a iniciar sesión</button>
+    </div>
+</div>
+
+<div class="card video-tutorial" id="tutorial">
+            <h1 class="texto-tutorial">Tutorial</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/fcmYrba9ZXY?si=1fntBMvuZyjBYPv-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="card about-us" id="about">
+            <h1 class="about-us-title">Sobre nosotros</h1>
+            <h4 class="abut-us-text">Hola somos los power computines y somos un equipo y ayudamos a los adultos mayores con nuestra app y eso es lo que hacemos esto es texto sobre nosotros espero que les guste estoy rellenando con mucho texto que opinan. mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto mucho texto </h4>
+        </div>
+</body>
 {%endblock%}
