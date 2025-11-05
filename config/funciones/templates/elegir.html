@@ -6,7 +6,7 @@
 <h2>Yo te puedo ayudar!</h2>
 <ul>
     {% for estudiante in lista %}
-    <li>{{ estudiante }} <a href='{% url "agendar_citas" %}'>Agendar Cita</a></li>
+    <li>{{ estudiante.usuario }} - {{ estudiante.descripcion }} <a href='{% url "agendar_citas" %}'>Agendar Cita</a></li>
     {% empty %}
     <li>No hay voluntarios disponibles</li>
     {% endfor %}

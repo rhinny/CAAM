@@ -133,7 +133,7 @@ def elegir(request):
     for estudiante in estudiantes:
         if estudiante.comuna == comuna_adultoM:
             voluntario = Publi.objects.get(usuario=estudiante)
-            lista.append([voluntario.usuario, voluntario.descripcion])
+            lista.append(voluntario)
     return render(request, "elegir.html", {"lista":lista})
 
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita
