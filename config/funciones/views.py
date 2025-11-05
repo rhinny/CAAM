@@ -136,8 +136,8 @@ def elegir(request):
         if estudiante.comuna == comuna_adultoM:
             areas_estudiante = [area.nombre for area in estudiante.areas.all()]
             for area in areas_adultoM:
-                if area in areas_estudiante and voluntario not in lista:
-                    lista.append(voluntario)
+                if area in areas_estudiante and [voluntario, areas_estudiante] not in lista:
+                    lista.append([voluntario, areas_estudiante])
     return render(request, "elegir.html", {"lista":lista})
 
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita

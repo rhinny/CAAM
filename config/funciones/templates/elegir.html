@@ -5,8 +5,22 @@
 {% block content %}
 <h2>Yo te puedo ayudar!</h2>
 <ul>
-    {% for estudiante in lista %}
-    <li>{{ estudiante.usuario }} - {{ estudiante.descripcion }} <a href='{% url "agendar_citas" %}'>Agendar Cita</a></li>
+    {% for voluntario, estudiante in lista %}
+    <li><h3>{{ voluntario.usuario }}</h3>
+    {{ voluntario.descripcion }}
+    <br>
+    Te puedo ayudar en: 
+    {% for area in estudiante %} 
+    {% if area == estudiante|last %}
+    {{ area }}. 
+    {% else %}
+    {{ area }},
+    {% endif %}
+    {% endfor %}
+    <br>
+    ¡En tu comuna!
+    <br>
+    <a href='{% url "agendar_citas" %}'>Agendar Cita</a></li>
     {% empty %}
     <li>No hay voluntarios disponibles</li>
     {% endfor %}
