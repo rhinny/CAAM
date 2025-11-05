@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from datetime import date, timedelta, datetime
 from .models import FechasDisponibles, Publi
 from django.views.decorators.csrf import csrf_exempt
-from app.models import Usuarios
+from app.models import Usuarios, Area
 from .forms import *
 from django.contrib.auth.decorators import login_required
 from app.forms import *
@@ -128,12 +128,16 @@ def perfil_estudiante(request):
 #filtro por áreas y comuna
 def elegir(request):
     comuna_adultoM = request.user.comuna
+    areas_adultoM = [area.nombre for area in request.user.areas.all()]
     estudiantes = Usuarios.objects.filter(tipo="ESTUDIANTE")
     lista = []
     for estudiante in estudiantes:
+        voluntario = Publi.objects.get(usuario=estudiante)
         if estudiante.comuna == comuna_adultoM:
-            voluntario = Publi.objects.get(usuario=estudiante)
-            lista.append(voluntario)
+            areas_estudiante = [area.nombre for area in estudiante.areas.all()]
+            for area in areas_adultoM:
+                if area in areas_estudiante and voluntario not in lista:
+                    lista.append(voluntario)
     return render(request, "elegir.html", {"lista":lista})
 
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita

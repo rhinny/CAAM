@@ -28,7 +28,7 @@ def login_view(request):
             if user.tipo == 'ESTUDIANTE':
                 return redirect("perfil_estudiante") # Redirigir al home de estudiante
             else:
-                return redirect("home") # Redirigir al home de adultom
+                return redirect("elegir") # Redirigir al home de adultom
     else:
         form = AuthenticationForm()
     return render(request, "usuarios/login.html", {'form':form})
@@ -41,7 +41,7 @@ def comuna(request):
             if request.user.tipo == "ESTUDIANTE":
                 return redirect("publicar") #debería redirigir a selección de fechas disponibles
             else:
-                return redirect("home") #debería redirigir a /adultomayor (según diseño)
+                return redirect("elegir") #debería redirigir a /adultomayor (según diseño)
     else:
         form = ComunaForm(instance=request.user)
         form.fields['comuna'].queryset = Comuna.objects.all().order_by('nombre')
