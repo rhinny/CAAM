@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adulto Mayor</title>
-</head>
-<body>
-    <h1>Aquí se muestran los perfiles que cumplen el filtro y tienen un botón para agendar una cita</h1>
-</body>
-</html>
+{% extends "index.html" %}
+
+{% block title %}Adulto Mayor{% endblock %}
+
+{% block content %}
+<h2>Yo te puedo ayudar!</h2>
+<ul>
+    {% for estudiante in lista %}
+    <li>{{ estudiante }} <a href='{% url "agendar_citas" %}'>Agendar Cita</a></li>
+    {% empty %}
+    <li>No hay voluntarios disponibles</li>
+    {% endfor %}
+</ul>
+{% endblock %}

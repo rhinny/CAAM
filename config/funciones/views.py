@@ -127,8 +127,14 @@ def perfil_estudiante(request):
 #función para que muestre los perfiles de los estudiantes a los adultos mayores
 #filtro por áreas y comuna
 def elegir(request):
-    #...
-    return render(request, "elegir.html")
+    comuna_adultoM = request.user.comuna
+    estudiantes = Usuarios.objects.filter(tipo="ESTUDIANTE")
+    lista = []
+    for estudiante in estudiantes:
+        if estudiante.comuna == comuna_adultoM:
+            voluntario = Publi.objects.get(usuario=estudiante)
+            lista.append([voluntario.usuario, voluntario.descripcion])
+    return render(request, "elegir.html", {"lista":lista})
 
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita
 #envíar notificación al estudiante
