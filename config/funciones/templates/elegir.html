@@ -5,13 +5,13 @@
 {% block content %}
 <h2>Yo te puedo ayudar!</h2>
 <ul>
-    {% for voluntario, estudiante in lista %}
-    <li><h3>{{ voluntario.usuario }}</h3>
+    {% for estudiante, voluntario, areas_estudiante in lista %}
+    <li><h3>{{ estudiante.first_name }} {{ estudiante.last_name }}</h3>
     {{ voluntario.descripcion }}
     <br>
     Te puedo ayudar en: 
-    {% for area in estudiante %} 
-    {% if area == estudiante|last %}
+    {% for area in areas_estudiante %} 
+    {% if area == areas_estudiante|last %}
     {{ area }}. 
     {% else %}
     {{ area }},

@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = Usuarios
-        fields = ['tipo','rut','email','username','password1','password2']
+        fields = ['tipo','rut','email','username', 'first_name', 'last_name', 'password1','password2']
 
 class ComunaForm(forms.ModelForm):
     class Meta:
