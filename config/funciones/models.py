@@ -28,4 +28,21 @@ class Publi(models.Model):
     
     def tag_comuna(self):
         return self.usuario.comuna.nombre
-    
+
+'''
+por implementar en el push
+class Cita():
+    estudiante = models.ForeignKey(
+    Usuarios,
+    on_delete=models.CASCADE,
+    limit_choices_to={"es_estudiante": True},
+    )
+    adultoM = models.ForeignKey(
+    Usuarios,
+    on_delete=models.CASCADE,
+    limit_choices_to={"es_adulto_mayor": True},
+    )
+    fechas = models.DateField()
+    #def completo
+    #def incompleto
+'''

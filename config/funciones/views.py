@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from datetime import date, timedelta, datetime
 from .models import FechasDisponibles, Publi
@@ -143,8 +143,26 @@ def elegir(request):
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita
 #envíar notificación al estudiante
 def agendar_citas(request):
-    #...
+    adultoM = request.user
+    if adultoM.es_estudiante():
+        return render(request, "no_autorizado.html")
     return render(request, "agendar_citas.html")
+
+'''
+def cita_calendario(request):
+    estudiante = get_object_or_404(Usuarios, rut.estudiante_id, tipo="ESTUDIANTE")
+    publi = Publi.objects.filter(usuario=estudiante)
+    fechas = FechasDisponibles.objects.filter(usuario=estudiante).order_by("fecha")
+    if request.method == "POST":
+        fecha_id = request.POST.get("fecha_id")
+        fecha = get_object_or_404(FechasDisponibles, id=fecha_id, usuario=estudiante)
+        Cita.objects.update_or_create(
+            voluntario = estudiante
+            adultoM = request.user)
+            defaults = {"fecha":fecha}
+        return redirect("cita_confirmada") #extiende el html de ver perfil
+    return render(request, "agendar_citas.html",{"estudiante":estudiante,"publi":publi,"fechas":fechas})
+'''
 
 #muestra las citas que tienen agendadas tanto los adultos mayores como los estudiantes
 def ver_citas(request):
