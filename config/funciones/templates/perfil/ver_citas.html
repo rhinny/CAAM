@@ -1,11 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Citas</title>
-</head>
-<body>
-    <h1>Aquí se ve el calendario con qué citas se tienen agendadas para adulto mayor y estudiante</h1>
-</body>
-</html>
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Mis citas agendadas</h2>
+
+    {% if citas %}
+    <ul class="list-group">
+        {% for cita in citas %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <strong>Estudiante:</strong> {{ cita.estudiante.first_name }} {{ cita.estudiante.last_name }}<br>
+                <strong>Fecha:</strong> {{ cita.fecha.fecha }}
+            </div>
+            <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No tienes citas agendadas aún.</p>
+    {% endif %}
+</div>
+
+<div class="mt-4">
+        <a href="{% url 'elegir' %}" class="button">Volver al listado</a>
+</div>
+{% endblock %}

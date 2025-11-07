@@ -1,3 +1,4 @@
+{% extends "index.html" %}
 
 {% block content %}
 <div class="container mt-4">
@@ -68,5 +69,30 @@
         </div>
     </div>
 </div>
+
+<!--Ver citas-->
+<div class="card mt-4">
+    <div class="card-header">Citas agendadas</div>
+    <div class="card-body">
+        {% if citas %}
+        <ul class="list-group">
+            {% for cita in citas %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Adulto mayor:</strong> {{ cita.adulto_mayor.first_name }} {{ cita.adulto_mayor.last_name }}<br>
+                    <strong>Fecha:</strong> {{ cita.fecha.fecha }}
+                </div>
+                <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                    {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No tienes citas agendadas aún.</p>
+        {% endif %}
+    </div>
+</div>
+
 {% endblock %}
 

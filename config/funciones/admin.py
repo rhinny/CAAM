@@ -5,3 +5,4 @@ from . import models
 
 admin.site.register(models.FechasDisponibles)
 admin.site.register(models.Publi)
+admin.site.register(models.Cita)

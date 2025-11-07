@@ -29,6 +29,21 @@ class Publi(models.Model):
     def tag_comuna(self):
         return self.usuario.comuna.nombre
 
+class Cita(models.Model):
+    estudiante = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name="matches_recibidos")
+    adulto_mayor = models.ForeignKey(Usuarios, on_delete=models.CASCADE, related_name="matches_realizados")
+    fecha = models.ForeignKey(FechasDisponibles, on_delete=models.CASCADE)
+    creado = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("estudiante", "adulto_mayor") #una cita a la vez
+
+    def esta_completada(self):
+        return self.fecha.fecha < timezone.now().date()
+
+
+
+
 '''
 por implementar en el push
 class Cita():

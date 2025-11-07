@@ -118,14 +118,18 @@ def perfil_estudiante(request):
         return render(request, "no_autorizado.html")
     publi = Publi.objects.filter(usuario=usuario).first()
     fechas = FechasDisponibles.objects.filter(usuario=usuario).order_by("fecha")
-
+    citas = Cita.objects.filter(estudiante=usuario).select_related("adulto_mayor", "fecha")
+    tipo = "adulto" if usuario.es_adulto_mayor() else "estudiante"
     return render(request, "perfil/perfil_estudiante.html", {
         "publi": publi,
         "fechas": fechas,
-        "usuario": usuario,})
+        "usuario": usuario,
+        "citas": citas,
+        "tipo":tipo,})
 
 #función para que muestre los perfiles de los estudiantes a los adultos mayores
 #filtro por áreas y comuna
+@login_required
 def elegir(request):
     comuna_adultoM = request.user.comuna
     areas_adultoM = [area.nombre for area in request.user.areas.all()]
@@ -138,8 +142,59 @@ def elegir(request):
             for area in areas_adultoM:
                 if area in areas_estudiante and [estudiante, voluntario, areas_estudiante] not in lista:
                     lista.append([estudiante, voluntario, areas_estudiante])
-    return render(request, "elegir.html", {"lista":lista})
+    tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
+    return render(request, "elegir.html", {"lista":lista,"tipo":tipo})
 
+@login_required
+def agendar_citas(request, estudiante_id):
+    adultoM = request.user
+    if not adultoM.es_adulto_mayor():
+        return render(request, "no_autorizado.html")
+
+    estudiante = get_object_or_404(Usuarios, rut=estudiante_id)
+    publi = Publi.objects.filter(usuario=estudiante).first()
+    fechas = FechasDisponibles.objects.filter(usuario=estudiante).order_by("fecha")
+    if request.method == "POST":
+        fecha_id = request.POST.get("fecha_id")
+        fecha = get_object_or_404(FechasDisponibles, id=fecha_id, usuario=estudiante)
+        Cita.objects.update_or_create(
+            estudiante=estudiante,
+            adulto_mayor=adultoM,
+            defaults={"fecha": fecha}
+        )
+        return redirect("ver_citas")
+    tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
+    return render(request, "agendar_citas.html", {
+        "estudiante": estudiante,
+        "publi": publi,
+        "fechas": fechas,
+        "tipo":tipo,
+    })
+
+@login_required
+def mis_citas(request):
+    usuario = request.user
+    if usuario.es_adulto_mayor():
+        citas = Cita.objects.filter(adulto_mayor=usuario).select_related("estudiante", "fecha")
+        return render(request, "perfil/ver_citas.html", {"citas": citas})
+    elif usuario.es_estudiante():
+        citas = Cita.objects.filter(estudiante=usuario).select_related("adulto_mayor", "fecha")
+        publi = Publi.objects.filter(usuario=usuario).first()
+        fechas = FechasDisponibles.objects.filter(usuario=usuario).order_by("fecha")
+        return render(request, "perfil/perfil_estudiante.html", {
+            "usuario": usuario,
+            "publi": publi,
+            "fechas": fechas,
+            "matches": citas
+        })
+    tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
+    return render(request, "no_autorizado.html",{"tipo":tipo,})
+
+
+
+
+
+'''
 #muestra calendario para agendar el día y la razón de la cita, opción de imprimir comprobante de cita
 #envíar notificación al estudiante
 def agendar_citas(request):
@@ -148,7 +203,7 @@ def agendar_citas(request):
         return render(request, "no_autorizado.html")
     return render(request, "agendar_citas.html")
 
-'''
+
 def cita_calendario(request):
     estudiante = get_object_or_404(Usuarios, rut.estudiante_id, tipo="ESTUDIANTE")
     publi = Publi.objects.filter(usuario=estudiante)

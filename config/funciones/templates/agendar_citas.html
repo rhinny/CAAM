@@ -1,1 +1,88 @@
-{{% extends "index.html" %}}
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Perfil de {{ estudiante.first_name }} {{ estudiante.last_name }}</h2>
+
+    {% if publi %}
+        <div class="card mt-3">
+            <div class="card-header">Descripción</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ publi.titulo }}</h5>
+                <p class="card-text">{{ publi.descripcion }}</p>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="card mt-3">
+        <div class="card-header">Áreas</div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for area in estudiante.areas.all %}
+                    <li class="list-group-item">{{ area.nombre }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header">Comuna</div>
+        <div class="card-body">
+            <p>{{ estudiante.comuna.nombre }}</p>
+        </div>
+    </div>
+
+<!-- Selección de fechas -->
+<div class="container mt-4">
+    <h2>Agendar cita</h2>
+
+    <!-- Calendario -->
+    <div id="calendar"></div>
+
+    <!-- Formulario oculto para confirmar -->
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <input type="hidden" name="fecha_id" id="fecha_id">
+        <button type="submit" class="btn btn-success" id="confirmar-btn" disabled>Confirmar cita</button>
+    </form>
+</div>
+
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendarEl = document.getElementById('calendar');
+    const fechaInput = document.getElementById('fecha_id');
+    const confirmarBtn = document.getElementById('confirmar-btn');
+
+    const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''
+        },
+        events: [
+            {% for fecha in fechas %}
+            {
+                title: 'Disponible',
+                start: '{{ fecha.fecha|date:"Y-m-d" }}',
+                id: '{{ fecha.id }}'
+            },
+            {% endfor %}
+        ],
+        eventClick: function(info) {
+            fechaInput.value = info.event.id;
+            confirmarBtn.disabled = false;
+        }
+    });
+
+    calendar.render();
+});
+</script>
+
+<div class="mt-4">
+        <a href="{% url 'elegir' %}" class="button">Volver al listado</a>
+</div>
+{% endblock %}

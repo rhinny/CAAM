@@ -9,7 +9,7 @@ urlpatterns = [path('calendario/', views.calendario, name="calendario"),
                path('perfil/perfil_estudiante/', views.perfil_estudiante, name='perfil_estudiante'),
                path('fechas/', views.fechas_usuario, name='fechas_usuario'),
                path('adulto_mayor/', views.elegir, name='elegir'),
-               path('agendar_cita/', views.agendar_citas, name='agendar_citas'),
+               path('agendar_citas/<str:estudiante_id>', views.agendar_citas, name='agendar_citas'),
                path('citas/', views.ver_citas, name='ver_citas'),
                path('certificado/', views.certificados, name='certificados'),
                ]
