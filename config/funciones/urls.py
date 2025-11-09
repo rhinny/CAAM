@@ -10,6 +10,6 @@ urlpatterns = [path('calendario/', views.calendario, name="calendario"),
                path('fechas/', views.fechas_usuario, name='fechas_usuario'),
                path('adulto_mayor/', views.elegir, name='elegir'),
                path('agendar_citas/<str:estudiante_id>', views.agendar_citas, name='agendar_citas'),
-               path('citas/', views.ver_citas, name='ver_citas'),
+               path('citas/', views.mis_citas, name='mis_citas'),
                path('certificado/', views.certificados, name='certificados'),
                ]

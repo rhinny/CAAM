@@ -185,7 +185,7 @@ def mis_citas(request):
             "usuario": usuario,
             "publi": publi,
             "fechas": fechas,
-            "matches": citas
+            "citas": citas
         })
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
     return render(request, "no_autorizado.html",{"tipo":tipo,})
