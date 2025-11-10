@@ -2,6 +2,8 @@
 <html lang="en">
 
 {% load static %}
+{{ request.resolver_match.url_name }}
+
 
 <head>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -19,11 +21,15 @@
     </main>
 
     <header class="header">
-        <div class="logo-container"> <img src="images/logo1.png" class="logo" alt="" srcset=""></div>
+        <div class="logo-container"> 
+            <img src="images/logo1.png" class="logo" alt="" srcset="">
+        </div>
         <div class="indice">
             <a href='{% url "home" %}'>inicio</a>
-            <a href="about">sobre nosotros</a>
-            <a href="https://www.youtube.com/embed/fcmYrba9ZXY?si=1fntBMvuZyjBYPv-">video tutorial</a>
+            {% if request.resolver_match.url_name == 'home' %}
+                <a href="#about">sobre nosotros</a>
+                <a href="#tutorial">video tutorial</a>
+            {% endif %}
         </div>
     </header>
 
