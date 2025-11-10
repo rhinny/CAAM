@@ -3,10 +3,13 @@
     LOGIN
 {% endblock %}
 {% block content %}
-    <h1>Inicio de sesión</h1>
-    <form action="/usuarios/login/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button class="form-submit">Entrar</button>
-    </form>
+    <h1 class="form-title">Inicio de sesión</h1>
+    <div class="formulario">
+        <form action="/usuarios/login/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="form-submit">Entrar</button>
+        </form>
+    </div>
+    
 {% endblock %}

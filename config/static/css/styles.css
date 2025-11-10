@@ -154,3 +154,31 @@ a:active {
   margin-left: 0vw;
   margin-top: 0vw;
 }
+.formulario {
+  justify-content: center;
+  display:flex;
+  align-items: center;
+}
+form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-title {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 3rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: hsl(239, 98%, 67%);
+}
+.form-submit {
+  font-size: 2.25vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  height: 4rem;
+  color: hsl(239, 98%, 67%);
+}
