@@ -9,12 +9,15 @@
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
                 <strong>Estudiante:</strong> {{ cita.estudiante.first_name }} {{ cita.estudiante.last_name }}<br>
-                <strong>Fecha:</strong> {{ cita.fecha.fecha }}
+                <strong>Fecha:</strong> {{ cita.fecha.fecha }}<br>
+                <strong>La comunicación es esencial!</strong><br>
+                 <strong>Contactate mediante:</strong> {{ cita.estudiante.email }}
             </div>
             <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
                 {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
             </span>
         </li>
+        <br>
         {% endfor %}
     </ul>
     {% else %}

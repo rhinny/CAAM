@@ -103,6 +103,10 @@ main {
 
 .logo {
   width: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
 }
 
 .indice {
@@ -112,8 +116,7 @@ main {
   align-items: center;
   padding-right: 3rem;
 }
-.indice div {
-}
+
 a {
   text-decoration: none;
   font-size: 2.25vh;

@@ -153,6 +153,7 @@ def agendar_citas(request, estudiante_id):
 
     estudiante = get_object_or_404(Usuarios, rut=estudiante_id)
     publi = Publi.objects.filter(usuario=estudiante).first()
+    email = estudiante.email
     fechas = FechasDisponibles.objects.filter(usuario=estudiante).order_by("fecha")
     if request.method == "POST":
         fecha_id = request.POST.get("fecha_id")
@@ -160,7 +161,7 @@ def agendar_citas(request, estudiante_id):
         Cita.objects.update_or_create(
             estudiante=estudiante,
             adulto_mayor=adultoM,
-            defaults={"fecha": fecha}
+            defaults={"fecha": fecha, "email":email}
         )
         return redirect("mis_citas")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
