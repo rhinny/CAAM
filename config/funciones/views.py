@@ -97,9 +97,6 @@ def fechas_usuario(request):
     return JsonResponse(eventos, safe=False)
 
 
-
-
-
 @login_required
 def perfil_estudiante(request):
     usuario = request.user
@@ -131,6 +128,8 @@ def elegir(request):
             for area in areas_adultoM:
                 if area in areas_estudiante and [estudiante, voluntario, areas_estudiante] not in lista:
                     lista.append([estudiante, voluntario, areas_estudiante])
+        else:
+            return render(request, "elegir.html")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
     return render(request, "elegir.html", {"lista":lista,"tipo":tipo})
 

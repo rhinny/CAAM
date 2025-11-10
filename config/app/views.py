@@ -39,9 +39,9 @@ def comuna(request):
         if form.is_valid():
             form.save()
             if request.user.tipo == "ESTUDIANTE":
-                return redirect("publicar") #debería redirigir a selección de fechas disponibles
+                return redirect("publicar") 
             else:
-                return redirect("elegir") #debería redirigir a /adultomayor (según diseño)
+                return redirect("elegir") 
     else:
         form = ComunaForm(instance=request.user)
         form.fields['comuna'].queryset = Comuna.objects.all().order_by('nombre')

@@ -8,24 +8,27 @@
         <a href="{% url 'mis_citas' %}" class="button">Ver citas actuales</a>
 </div>
 <ul>
-    {% for estudiante, voluntario, areas_estudiante in lista %}
-    <li><h3>{{ estudiante.first_name }} {{ estudiante.last_name }}</h3>
-    {{ voluntario.descripcion }}
-    <br>
-    Te puedo ayudar en: 
-    {% for area in areas_estudiante %} 
-    {% if area == areas_estudiante|last %}
-    {{ area }}. 
-    {% else %}
-    {{ area }},
-    {% endif %}
-    {% endfor %}
-    <br>
-    ¡En tu comuna!
-    <br>
-    <a href='{% url "agendar_citas" estudiante.rut %}'>Agendar Cita</a></li>
-    {% empty %}
+    {%if lista%}
+        {% for estudiante, voluntario, areas_estudiante in lista %}
+        <li><h3>{{ estudiante.first_name }} {{ estudiante.last_name }}</h3>
+        {{ voluntario.descripcion }}
+        <br>
+        Te puedo ayudar en: 
+        {% for area in areas_estudiante %} 
+        {% if area == areas_estudiante|last %}
+        {{ area }}. 
+        {% else %}
+        {{ area }},
+        {% endif %}
+        {% endfor %}
+        <br>
+        ¡En tu comuna!
+        <br>
+        <a href='{% url "agendar_citas" estudiante.rut %}'>Agendar Cita</a></li>
+        {% empty %}
+        {% endfor %}
+    {%else%}
     <li>No hay voluntarios disponibles</li>
-    {% endfor %}
+    {%endif%}
 </ul>
 {% endblock %}
