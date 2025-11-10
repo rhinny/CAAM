@@ -97,18 +97,7 @@ def fechas_usuario(request):
     return JsonResponse(eventos, safe=False)
 
 
-@csrf_exempt
-@login_required
-def borrar_fecha(request): # repite la función de borrar fechas pero para editarlas luego, no me dejaba hacerlo de otra forma :(
-    if request.method == "POST":
-        fecha_str = request.POST.get("fecha")
-        try:
-            fecha_obj = datetime.strptime(fecha_str, "%Y-%m-%d").date()
-            FechasDisponibles.objects.filter(usuario=request.user, fecha=fecha_obj).delete()
-            return JsonResponse({"status": "ok"})
-        except ValueError:
-            return JsonResponse({"status": "invalid date"}, status=400)
-    return JsonResponse({"status": "invalid method"}, status=405)
+
 
 
 @login_required
