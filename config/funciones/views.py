@@ -162,7 +162,7 @@ def agendar_citas(request, estudiante_id):
             adulto_mayor=adultoM,
             defaults={"fecha": fecha}
         )
-        return redirect("ver_citas")
+        return redirect("mis_citas")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
     return render(request, "agendar_citas.html", {
         "estudiante": estudiante,
