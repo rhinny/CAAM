@@ -36,9 +36,6 @@ class Cita(models.Model):
     fecha = models.ForeignKey(FechasDisponibles, on_delete=models.CASCADE)
     creado = models.DateTimeField(auto_now_add=True)
 
-    #class Meta:
-        #unique_together = ("estudiante", "adulto_mayor") #una cita a la vez
-
     def esta_completada(self):
         return self.fecha.fecha < timezone.now().date()
 

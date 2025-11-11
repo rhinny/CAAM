@@ -73,25 +73,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 start: '{{ fecha.fecha|date:"Y-m-d" }}',
                 id: '{{ fecha.id }}',
                     backgroundColor: 'green',
-                {% else %}
-                title: 'No Disponible',
-                start: '{{ fecha.fecha|date:"Y-m-d" }}',
-                id: '{{ fecha.id }}',
-                    backgroundColor: "#d50c34",
+                //{% else %}
+                //title: 'No Disponible',
+                //start: '{{ fecha.fecha|date:"Y-m-d" }}',
+                //id: '{{ fecha.id }}',
+                    //backgroundColor: "#d50c34",
                 {% endif %}
             },
             {% endfor %}
         ],
         eventClick: function(info) {
             if(eventoSeleccionado){
-                eventoSeleccionado.setProp('backgroundColor','#585bfd')
+                eventoSeleccionado.setProp('backgroundColor','green')
+                eventoSeleccionado.setProp('title','Disponible')
             }
 
             eventoSeleccionado = info.event;
-            info.event.setProp('backgroundColor','e42f47') 
+            info.event.setProp('backgroundColor','darkblue') 
+            info.event.setProp('title','Agendado') 
             fechaInput.value = info.event.id;
             confirmarBtn.disabled = false;
-            alert("Has seleccionado la fecha: " + info.event.start.toLocaleDateString());
         }
     });
 

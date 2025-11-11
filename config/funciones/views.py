@@ -88,12 +88,13 @@ def editar_fechas(request):
 def fechas_usuario(request):
     usuario = request.user
     fechas = FechasDisponibles.objects.filter(usuario=usuario)
-    eventos = [{
-            "title": "Disponible",
-            "start": fecha.fecha.isoformat(),
-            "allDay": True}
-        for fecha in fechas
-    ]
+    eventos = []
+    for fecha in fechas:
+        if fecha.disponible:
+            eventos.append({"title": "Disponible", "start": fecha.fecha.isoformat(), "allDay": True})
+        else:
+            eventos.append({"title": "Agendado", "start": fecha.fecha.isoformat(), "allDay": True, "backgroundColor": "red"})
+
     return JsonResponse(eventos, safe=False)
 
 
