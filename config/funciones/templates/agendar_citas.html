@@ -68,12 +68,15 @@ document.addEventListener('DOMContentLoaded', function() {
         events: [
             {% for fecha in fechas %}
             {
+                {% if fecha.disponible %}
                 title: 'Disponible',
                 start: '{{ fecha.fecha|date:"Y-m-d" }}',
                 id: '{{ fecha.id }}',
-                {% if fecha.disponible %}
                     backgroundColor: '#585bfd',
                 {% else %}
+                title: 'No Disponible',
+                start: '{{ fecha.fecha|date:"Y-m-d" }}',
+                id: '{{ fecha.id }}',
                     backgroundColor: "#d50c34",
                 {% endif %}
             },

@@ -144,21 +144,22 @@ def agendar_citas(request, estudiante_id):
     if request.method == "POST":
         fecha_id = request.POST.get("fecha_id")
         fecha = get_object_or_404(FechasDisponibles, id=fecha_id, usuario=estudiante)
-        fecha.disponible = False
-        fecha.save()
-        '''
-        Cita.objects.update_or_create(
-            estudiante=estudiante,
-            adulto_mayor=adultoM,
-            defaults={"fecha": fecha, "email":email}
-        )
-        '''
-        Cita.objects.update_or_create(
-            estudiante = estudiante, 
-            adulto_mayor = adultoM,
-            fecha  = fecha
-        )
-        return redirect("mis_citas")
+        if fecha.disponible:
+            fecha.disponible = False
+            fecha.save()
+            '''
+            Cita.objects.update_or_create(
+                estudiante=estudiante,
+                adulto_mayor=adultoM,
+                defaults={"fecha": fecha, "email":email}
+            )
+            '''
+            Cita.objects.update_or_create(
+                estudiante = estudiante, 
+                adulto_mayor = adultoM,
+                fecha  = fecha
+            )
+            return redirect("mis_citas")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
     return render(request, "agendar_citas.html", {
         "estudiante": estudiante,
