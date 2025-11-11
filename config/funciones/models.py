@@ -8,6 +8,7 @@ class FechasDisponibles(models.Model):
     #nombre_persona = models.CharField(max_length=100)
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True, blank=True)
     fecha = models.DateField()
+    disponible = models.BooleanField(default=True)
     hora = models.TimeField(null=True, blank=True)
 
     def __str__(self):
@@ -35,8 +36,8 @@ class Cita(models.Model):
     fecha = models.ForeignKey(FechasDisponibles, on_delete=models.CASCADE)
     creado = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        unique_together = ("estudiante", "adulto_mayor") #una cita a la vez
+    #class Meta:
+        #unique_together = ("estudiante", "adulto_mayor") #una cita a la vez
 
     def esta_completada(self):
         return self.fecha.fecha < timezone.now().date()

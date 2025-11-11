@@ -71,7 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 title: 'Disponible',
                 start: '{{ fecha.fecha|date:"Y-m-d" }}',
                 id: '{{ fecha.id }}',
-                backgroundColor: '#585bfd',
+                {% if fecha.disponible %}
+                    backgroundColor: '#585bfd',
+                {% else %}
+                    backgroundColor: "#d50c34",
+                {% endif %}
             },
             {% endfor %}
         ],

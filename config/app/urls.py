@@ -8,5 +8,6 @@ urlpatterns = [#path('registro/estudiante', views.registro_estudiante, name='reg
                path('usuarios/registro/', views.registro, name="registro"),
                path('usuarios/login/', views.login_view, name="login"),
                path('usuarios/comuna/', views.comuna, name = 'comuna'),
-               path('usuarios/registro/seleccion/', views.seleccion, name = 'seleccion')
+               path('usuarios/registro/seleccion/', views.seleccion, name = 'seleccion'),
+               path('usuarios/logout', views.logout_view, name='logout'),
                ]

@@ -7,8 +7,20 @@
 
 <div class="botones">
     <div class="card button-container">
-                <button onclick="window.location.href='{% url 'registro' %}'" class="primary-button" id="boton-registro">Ir a registro</button>
-                <button onclick="window.location.href='{% url 'login' %}'" class="secondary-button" id="boton-inicio-sesion">Ir a iniciar sesión</button>
+        {% if usuario %}
+            <a href="{% url 'logout' %}">Cerrar sesión</a>
+            <br>
+            {% if persona.tipo == "ESTUDIANTE" %}
+                <a href="{% url 'perfil_estudiante' %}">Perfil</a>
+            {% else %}
+                <a href="{% url 'elegir' %}">Agendar una cita</a>
+                <br>
+                <a href="{% url 'mis_citas' %}">Mis citas</a>
+            {%endif%}
+        {% else %}
+            <button onclick="window.location.href='{% url 'registro' %}'" class="primary-button" id="boton-registro">Ir a registro</button>
+            <button onclick="window.location.href='{% url 'login' %}'" class="secondary-button" id="boton-inicio-sesion">Ir a iniciar sesión</button>
+        {% endif %}
     </div>
 </div>
 

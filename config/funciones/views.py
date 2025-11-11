@@ -128,8 +128,6 @@ def elegir(request):
             for area in areas_adultoM:
                 if area in areas_estudiante and [estudiante, voluntario, areas_estudiante] not in lista:
                     lista.append([estudiante, voluntario, areas_estudiante])
-        else:
-            return render(request, "elegir.html")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"
     return render(request, "elegir.html", {"lista":lista,"tipo":tipo})
 
@@ -146,10 +144,19 @@ def agendar_citas(request, estudiante_id):
     if request.method == "POST":
         fecha_id = request.POST.get("fecha_id")
         fecha = get_object_or_404(FechasDisponibles, id=fecha_id, usuario=estudiante)
+        fecha.disponible = False
+        fecha.save()
+        '''
         Cita.objects.update_or_create(
             estudiante=estudiante,
             adulto_mayor=adultoM,
             defaults={"fecha": fecha, "email":email}
+        )
+        '''
+        Cita.objects.update_or_create(
+            estudiante = estudiante, 
+            adulto_mayor = adultoM,
+            fecha  = fecha
         )
         return redirect("mis_citas")
     tipo = "adulto" if request.user.es_adulto_mayor() else "estudiante"

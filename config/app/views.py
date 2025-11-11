@@ -1,12 +1,19 @@
 from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from .models import Usuarios
 from funciones.urls import *
 
 def home(request):
     contexto = {'texto':"Home"}
+    persona = request.user
+    if persona.is_authenticated:
+        usuario = True 
+    else:
+        usuario = False
+    contexto["usuario"] = usuario
+    contexto["persona"] = persona
     return render(request, "home.html",contexto)
 
 def registro(request):
@@ -32,6 +39,10 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, "usuarios/login.html", {'form':form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 def comuna(request):
     if request.method == "POST":
