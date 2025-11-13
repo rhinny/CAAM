@@ -7,10 +7,10 @@ class CustomUserCreationForm(UserCreationForm):
         model = Usuarios
         fields = ['tipo','rut','email','username', 'first_name', 'last_name', 'password1','password2']
 
-class ComunaForm(forms.ModelForm):
+class ComunaCampusForm(forms.ModelForm):
     class Meta:
         model = Usuarios
-        fields = ['comuna']
+        fields = ['comuna','campus']
 
 class SeleccionForm(forms.Form): 
     areas = forms.ModelMultipleChoiceField(

@@ -20,6 +20,9 @@ class Usuarios(AbstractUser):
     TIPOS = [("ESTUDIANTE","Estudiante"),
     ("ADULTO_MAYOR","Adulto Mayor")]   
     tipo = models.CharField(max_length=20, choices=TIPOS)
+    SEDES = [("SANJO","Campus San Joaquin"),
+    ("VITA","Campus Vitacura")]
+    campus =  models.CharField(max_length=20, choices=SEDES)
     comuna = models.ForeignKey(Comuna, on_delete=models.SET_NULL, null=True, blank=True)
     areas = models.ManyToManyField(Area, blank=True)
 
@@ -28,5 +31,11 @@ class Usuarios(AbstractUser):
     
     def es_adulto_mayor(self):
         return self.tipo == "ADULTO_MAYOR"
+
+    def vita(self):
+        return self.campus == "VITA"
+    
+    def sanjo(self):
+        return self.campus == "SANJO"
 
 

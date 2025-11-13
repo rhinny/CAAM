@@ -59,7 +59,7 @@ def publicar(request):
         return render(request, 'no_autorizado.html')
     
     if request.method=='POST':
-        comuna_form = ComunaForm(request.POST, instance=usuario)
+        comuna_form = ComunaCampusForm(request.POST, instance=usuario)
         seleccion_form = SeleccionForm(request.POST)
         publi_form = PubliForm(request.POST)
         if publi_form.is_valid() and seleccion_form.is_valid() and comuna_form.is_valid:
@@ -72,7 +72,7 @@ def publicar(request):
             return redirect ('perfil_estudiante') # perfil estudiantes
     else:
         publi_form = PubliForm(initial={'titulo':usuario.username})
-        comuna_form = ComunaForm(instance=usuario)
+        comuna_form = ComunaCampusForm(instance=usuario)
         seleccion_form = SeleccionForm(initial={'areas':usuario.areas.all()})
     return render(request, 'publicar.html', {"publi_form": publi_form,
         "comuna_form": comuna_form,

@@ -51,6 +51,20 @@
         </div>
     </div>
 
+<!-- Campus -->
+    <div class="card mt-4">
+        <div class="card-header">Campus</div>
+        <div class="card-body">
+            {% if usuario.campus %}
+                <ul class="list-group">
+                    <li class="list-group-item">{{ usuario.get_campus_display }}</li>
+                </ul>
+            {% else %}
+                <p>No has seleccionado campus aún.</p>
+            {% endif %}
+        </div>
+    </div>
+
 <!--Ver fechas-->
     <div class="card mb-4">
         <div class="card-header">Fechas disponibles</div>
