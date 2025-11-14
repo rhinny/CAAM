@@ -10,7 +10,6 @@
         {% csrf_token %}
 
         <div class="card mb-4">
-            <div class="card-header">Titulo de tu publicación</div>
             <div class="card-body">
                 {{ publi_form.titulo.label_tag }} {{ publi_form.titulo }}
                 {{ publi_form.descripcion.label_tag }} {{ publi_form.descripcion }}
