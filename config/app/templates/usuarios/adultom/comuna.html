@@ -3,10 +3,12 @@
     COMUNA 
 {% endblock %}
 {% block content %}
-    <h1>Selecciona tu comuna</h1>
-    <form action="/usuarios/comuna/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button class="form-submit">Aceptar</button>
-    </form>
+    <h1 class="form-title">Selecciona tu comuna</h1>
+    <div class="formulario">
+        <form action="/usuarios/comuna/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="form-submit">Aceptar</button>
+        </form>
+    </div>
 {% endblock %}
