@@ -10,7 +10,7 @@
         {% csrf_token %}
 
         <div class="card mb-4">
-            <div class="card-header">Información de tu publicación</div>
+            <div class="card-header">Titulo de tu publicación</div>
             <div class="card-body">
                 {{ publi_form.titulo.label_tag }} {{ publi_form.titulo }}
                 {{ publi_form.descripcion.label_tag }} {{ publi_form.descripcion }}
@@ -35,8 +35,8 @@
         <div class="card mb-4">
             <div class="card-header">Tu campus</div>
             <div class="card-body">
-                {{ comuna_form.campus.label_tag }} {{ comuna_form.campus }}
-                {% for error in comuna_form.campus.errors %}
+                {{ campus_form.campus.label_tag }} {{ campus_form.campus }}
+                {% for error in campus_form.campus.errors %}
                     <div class="text-danger">{{ error }}</div>
                 {% endfor %}
             </div>

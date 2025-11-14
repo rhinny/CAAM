@@ -46,7 +46,7 @@ def logout_view(request):
 
 def comuna(request):
     if request.method == "POST":
-        form = ComunaCampusForm(request.POST, instance=request.user)
+        form = ComunaForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             if request.user.tipo == "ESTUDIANTE":
@@ -54,12 +54,24 @@ def comuna(request):
             else:
                 return redirect("elegir") 
     else:
-        form = ComunaCampusForm(instance=request.user)
+        form = ComunaForm(instance=request.user)
         form.fields['comuna'].queryset = Comuna.objects.all().order_by('nombre')
     if request.user.tipo == "ESTUDIANTE":
         return render(request, "usuarios/estudiantes/comuna_disponibilidad.html", {'form':form})
     else:
         return render(request, "usuarios/adultom/comuna.html", {'form':form})
+    
+def campus(request):
+    if request.method == "POST":
+        form = CampusForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            if request.user.tipo == "ESTUDIANTE":
+                return redirect("publicar")  
+            return redirect("perfil")
+    else:
+        form = CampusForm(instance=request.user)
+    return render(request, "usuarios/estudiantes/comuna_disponibilidad.html", {'form': form})
 
 def seleccion(request):
     if request.method == "POST":

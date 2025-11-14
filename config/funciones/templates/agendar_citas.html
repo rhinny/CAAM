@@ -5,7 +5,6 @@
 
     {% if publi %}
         <div class="card mt-3">
-            <div class="card-header">Descripción</div>
             <div class="card-body">
                 <h5 class="card-title">{{ publi.titulo }}</h5>
                 <p class="card-text">{{ publi.descripcion }}</p>
@@ -25,9 +24,12 @@
     </div>
 
     <div class="card mt-3">
-        <div class="card-header">Comuna</div>
-        <div class="card-body">
-            <p>{{ estudiante.comuna.nombre }}</p>
+        <div class="card-header"> <strong>Comuna:</strong> {{ estudiante.comuna.nombre }}</div>
+        </div>
+    </div>
+    <br>
+    <div class="card mt-3">
+        <div class="card-header"><strong>Campus Universitario:</strong> {{ estudiante.get_campus_display }}</div>
         </div>
     </div>
 

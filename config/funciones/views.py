@@ -59,24 +59,28 @@ def publicar(request):
         return render(request, 'no_autorizado.html')
     
     if request.method=='POST':
-        comuna_form = ComunaCampusForm(request.POST, instance=usuario)
+        comuna_form = ComunaForm(request.POST, instance=usuario)
+        campus_form = CampusForm(request.POST, instance=usuario)
         seleccion_form = SeleccionForm(request.POST)
         publi_form = PubliForm(request.POST)
-        if publi_form.is_valid() and seleccion_form.is_valid() and comuna_form.is_valid:
+        if publi_form.is_valid() and seleccion_form.is_valid() and comuna_form.is_valid() and campus_form.is_valid():
             Publi.objects.filter(usuario=request.user).delete() #borrar el post anterior
             publi = publi_form.save(commit=False)
             publi.usuario = usuario
             publi.save()
             comuna_form.save()
+            campus_form.save()
             usuario.areas.set(seleccion_form.cleaned_data['areas'])
             return redirect ('perfil_estudiante') # perfil estudiantes
     else:
         publi_form = PubliForm(initial={'titulo':usuario.username})
-        comuna_form = ComunaCampusForm(instance=usuario)
+        comuna_form = ComunaForm(instance=usuario)
+        campus_form = CampusForm(instance=usuario)
         seleccion_form = SeleccionForm(initial={'areas':usuario.areas.all()})
     return render(request, 'publicar.html', {"publi_form": publi_form,
         "comuna_form": comuna_form,
-        "seleccion_form": seleccion_form})
+        "seleccion_form": seleccion_form,
+        "campus_form": campus_form,})
 
 @login_required
 def editar_fechas(request):
