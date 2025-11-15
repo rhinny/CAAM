@@ -15,8 +15,8 @@
 
                     <a href="{% url 'publicar' %}" class="btn btn-outline-primary mt-2">Editar perfil</a>
                 {% else %}
-                    <p>No has publicado tu perfil aún.</p>
-                    <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
+                    <p class="no-has">* No has creado tu perfil aún.</p>
+                    <a href="{% url 'publicar' %}" class="btn btn-primary">Crear perfil</a>
                 {% endif %}
             </div>
             <br>
@@ -33,7 +33,7 @@
                         {% endfor %}
                             </ul>
                         {% else %}
-                            <p>No has seleccionado áreas aún.</p>
+                            <p class="no-has">* No has seleccionado áreas aún.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                                 <li class="list-group-item">{{ usuario.comuna.nombre }}</li>
                             </ul>
                         {% else %}
-                            <p>No has seleccionado comuna aún.</p>
+                            <p class="no-has">* No has seleccionado comuna aún.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                                 <li class="list-group-item">{{ usuario.get_campus_display }}</li>
                             </ul>
                         {% else %}
-                            <p>No has seleccionado campus aún.</p>
+                            <p class="no-has">* No has seleccionado campus aún.</p>
                         {% endif %}
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                         </ul>
                         <a href="{% url 'editar_fechas' %}" class="btn btn-outline-secondary">Editar fechas</a>
                     {% else %}
-                        <p>No has seleccionado fechas aún.</p>
+                        <p class="no-has">* No has seleccionado fechas aún.</p>
                         <a href="{% url 'editar_fechas' %}" class="btn btn-secondary">Seleccionar fechas</a>
                     {% endif %}
                 </div>
