@@ -2,110 +2,116 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2>Tu perfil</h2>
-<!-- Publicación actual -->
-    <div class="card mt-4">
-        <div class="card-header">Tu publicación</div>
-        <div class="card-body">
-            {% if publi %}
-                <h5 class="card-title">{{ publi.titulo }}</h5>
-                <p class="card-text">{{ publi.descripcion }}</p>
+    <h1 class="form-title">Tu perfil</h1>
+    <div class="perfil-p1">
+        <!-- Publicación actual -->
+        <div class="card mt-4 tu-perfil">
+            
+            <div class="card-body">
+                {% if publi %}
+                    <h1 class="card-title">{{ publi.titulo }}</h1>
+                    <div class="card-header">Descripción:</div>
+                    <h4 class="card-text">{{ publi.descripcion }}</h4>
 
-                <a href="{% url 'publicar' %}" class="btn btn-outline-primary mt-2">Editar publicación</a>
-            {% else %}
-                <p>No has publicado tu perfil aún.</p>
-                <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
-            {% endif %}
+                    <a href="{% url 'publicar' %}" class="btn btn-outline-primary mt-2">Editar perfil</a>
+                {% else %}
+                    <p>No has publicado tu perfil aún.</p>
+                    <a href="{% url 'publicar' %}" class="btn btn-primary">Crear publicación</a>
+                {% endif %}
+            </div>
+            <br>
+            <div class="perfil-p2">
+                <!-- Áreas seleccionadas -->
+                {% if usuario.areas.all %}
+                <div class="card mt-4">
+                    <div class="card-header">Áreas seleccionadas:</div>
+                    <div class="card-body">
+                        {% if usuario.areas.all %}
+                            <ul class="list-group">
+                                {% for area in usuario.areas.all %}
+                                    <li class="list-group-item">{{ area.nombre }}</li>
+                        {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No has seleccionado áreas aún.</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Comuna seleccionada -->
+                <div class="card mt-4">
+                    <div class="card-header">Comuna seleccionada</div>
+                    <div class="card-body">
+                        {% if usuario.comuna %}
+                            <ul class="list-group">
+                                <li class="list-group-item">{{ usuario.comuna.nombre }}</li>
+                            </ul>
+                        {% else %}
+                            <p>No has seleccionado comuna aún.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Campus -->
+                <div class="card mt-4">
+                    <div class="card-header">Campus</div>
+                    <div class="card-body">
+                        {% if usuario.campus %}
+                            <ul class="list-group">
+                                <li class="list-group-item">{{ usuario.get_campus_display }}</li>
+                            </ul>
+                        {% else %}
+                            <p>No has seleccionado campus aún.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-<!-- Áreas seleccionadas -->
-    {% if usuario.areas.all %}
-    <div class="card mt-4">
-        <div class="card-header">Áreas seleccionadas:</div>
-        <div class="card-body">
-            {% if usuario.areas.all %}
+        
+        <div class="card mt-4 tus-citas">
+            <!--Ver citas-->
+            <div class="card-header">Citas agendadas</div>
+            <div class="card-body">
+                {% if citas %}
                 <ul class="list-group">
-                    {% for area in usuario.areas.all %}
-                        <li class="list-group-item">{{ area.nombre }}</li>
-            {% endfor %}
-                </ul>
-            {% else %}
-                <p>No has seleccionado áreas aún.</p>
-            {% endif %}
-        </div>
-    </div>
-    {% endif %}
-
-<!-- Comuna seleccionada -->
-    <div class="card mt-4">
-        <div class="card-header">Comuna seleccionada</div>
-        <div class="card-body">
-            {% if usuario.comuna %}
-                <ul class="list-group">
-                    <li class="list-group-item">{{ usuario.comuna.nombre }}</li>
-                </ul>
-            {% else %}
-                <p>No has seleccionado comuna aún.</p>
-            {% endif %}
-        </div>
-    </div>
-
-<!-- Campus -->
-    <div class="card mt-4">
-        <div class="card-header">Campus</div>
-        <div class="card-body">
-            {% if usuario.campus %}
-                <ul class="list-group">
-                    <li class="list-group-item">{{ usuario.get_campus_display }}</li>
-                </ul>
-            {% else %}
-                <p>No has seleccionado campus aún.</p>
-            {% endif %}
-        </div>
-    </div>
-
-<!--Ver fechas-->
-    <div class="card mb-4">
-        <div class="card-header">Fechas disponibles</div>
-        <div class="card-body">
-            {% if fechas %}
-                <ul>
-                    {% for fecha in fechas %}
-                        <li>{{ fecha.fecha|date:"l j F Y" }}</li>
+                    {% for cita in citas %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Adulto mayor:</strong> {{ cita.adulto_mayor.first_name }} {{ cita.adulto_mayor.last_name }}<br>
+                            <strong>Fecha:</strong> {{ cita.fecha.fecha }}
+                        </div>
+                        <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                            {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
+                        </span>
+                    </li>
                     {% endfor %}
                 </ul>
-                <a href="{% url 'editar_fechas' %}" class="btn btn-outline-secondary">Editar fechas</a>
-            {% else %}
-                <p>No has seleccionado fechas aún.</p>
-                <a href="{% url 'editar_fechas' %}" class="btn btn-secondary">Seleccionar fechas</a>
-            {% endif %}
-        </div>
-    </div>
-</div>
-
-<!--Ver citas-->
-<div class="card mt-4">
-    <div class="card-header">Citas agendadas</div>
-    <div class="card-body">
-        {% if citas %}
-        <ul class="list-group">
-            {% for cita in citas %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>Adulto mayor:</strong> {{ cita.adulto_mayor.first_name }} {{ cita.adulto_mayor.last_name }}<br>
-                    <strong>Fecha:</strong> {{ cita.fecha.fecha }}
+                {% else %}
+                <p>No tienes citas agendadas aún.</p>
+                {% endif %}
+            </div>
+            <!--Ver fechas-->
+            <div class="card mb-4">
+                <div class="card-header">Fechas disponibles</div>
+                <div class="card-body">
+                    {% if fechas %}
+                        <ul>
+                            {% for fecha in fechas %}
+                                <li>{{ fecha.fecha|date:"l j F Y" }}</li>
+                            {% endfor %}
+                        </ul>
+                        <a href="{% url 'editar_fechas' %}" class="btn btn-outline-secondary">Editar fechas</a>
+                    {% else %}
+                        <p>No has seleccionado fechas aún.</p>
+                        <a href="{% url 'editar_fechas' %}" class="btn btn-secondary">Seleccionar fechas</a>
+                    {% endif %}
                 </div>
-                <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                    {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
-                </span>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No tienes citas agendadas aún.</p>
-        {% endif %}
+            </div>
+        </div>
+        
     </div>
+    
 </div>
 
 {% endblock %}

@@ -1,3 +1,12 @@
+iframe {
+  padding: 3rem;
+  width: 60vw;
+  height: 40vw;
+  border-radius: 4rem;
+}
+
+
+/*--BOTONES--*/
 button {
   cursor:pointer;
   border-radius: 7vw;
@@ -5,13 +14,14 @@ button {
   box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
   transition: all 0.5s ease;
   border-color: hsl(239, 98%, 67%);
-  border-width: 0.25rem;
+  border-width: 0.5rem;
+  background-color: hsl(240, 73%, 93%);
 }
 button:hover {
   background-color: hsl(239, 98%, 67%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
-  border-color: hsl(0, 0%, 100%);
+  border-color: hsl(240, 73%, 93%);
 }
 button:active {
   background-color: hsl(231, 58%, 33%);
@@ -19,14 +29,7 @@ button:active {
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 50ms;
-  border-color: hsl(0, 0%, 100%);
-}
-
-iframe {
-  padding: 3rem;
-  width: 60vw;
-  height: 40vw;
-  border-radius: 4rem;
+  border-color: hsl(240, 73%, 93%);
 }
 .primary-button {
   width: 30vw;
@@ -120,22 +123,56 @@ iframe {
   font-weight: bolder;
   color: hsl(357, 100%, 63%);
   border-color: hsl(357, 100%, 63%);
+  background-color: hsl(352, 88%, 93%);
 }
 .logout-button:hover {
   background-color: hsl(357, 100%, 63%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
-  border-color: hsl(0, 0%, 100%);
+  border-color: hsl(352, 88%, 93%);
 }
 .logout-button:active {
-  background-color: hsl(358, 65%, 22%);
+  background-color: hsl(355, 72%, 32%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 50ms;
-  border-color: hsl(0, 0%, 100%);
+  border-color: hsl(352, 88%, 93%);
 }
-
+/*a*/
+a {
+  text-decoration: none;
+  font-size: 2.25vh;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(73, 91, 255);
+  width:fit-content;
+  padding: 15px;
+  border-radius: 1vh;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  transition: all 0.25s ease;
+}
+#calendar a {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+a:hover {
+  background-color: hsl(41, 100%, 55%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 29px 0px;
+}
+a:active {
+  background-color: hsl(39, 60%, 30%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+  transform: translateY(2px);
+  transition: 50ms;
+}
 main {
   margin-top: 20vh;
   width: 100%;
@@ -190,41 +227,7 @@ main {
   padding-right: 3rem;
 }
 
-a {
-  text-decoration: none;
-  font-size: 2.25vh;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bolder;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(73, 91, 255);
-  /*height: 6vh;
-  width: 21vw;*/
-  width:fit-content;
-  padding: 15px;
-  border-radius: 1vh;
-  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
-  transition: all 0.25s ease;
-}
-#calendar a {
-  width: 100%;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-a:hover {
-  background-color: hsl(41, 100%, 55%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: rgba(0, 0, 0, 0.5) 0px 7px 29px 0px;
-}
-a:active {
-  background-color: hsl(39, 60%, 30%);
-  color: hsl(0, 0%, 100%);
-  box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
-  transform: translateY(2px);
-  transition: 50ms;
-}
+
 .header {
   background-color: #0d266b;
   display:flex;
@@ -254,16 +257,16 @@ form {
   justify-content: center;
   display: flex;
   align-items: center;
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
 }
 .form-submit {
-  font-size: 2.25vh;
+  font-size: 1.5rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
-  height: 4rem;
+  height: 5rem;
   color: hsl(239, 98%, 67%);
 }
 h1, h2, h3, h4, h5, h6 {
@@ -278,5 +281,52 @@ label {
   font-weight: bolder;
   color: #0d266b;
   font-size: 1.5rem;
+}
+ul {
+  font-family: Arial, Helvetica, sans-serif;
+}
+p {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.perfil-p1 {
+  justify-content: center;
+  display:flex;
+  align-items: flex-start;
+  column-gap: 4vw;
+}
+.perfil-p2 {
+  justify-content: space-between;
+  display:flex;
+  align-items: flex-start;
+}
+.tu-perfil {
+  background-color: hsl(240, 73%, 93%);
+  padding: 2rem;
+  padding-top: 0.5rem;
+  border-radius: 1.5rem;
+  width: 50vw;
+}
+.card-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bolder;
+  color: hsl(239, 98%, 67%);
+}
+.card-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}
+.card-text {
+  font-family: Arial, Helvetica, sans-serif;
+  display: inline-block;
+  overflow-wrap: anywhere;
+  font-weight: lighter;
   
+}
+
+.tus-citas {
+  background-color: hsl(240, 73%, 93%);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  width: 30vw;
 }
