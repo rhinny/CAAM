@@ -8,8 +8,11 @@
             {% csrf_token %}
             {{form.non_field_errors}}
             <div>
-                {{form.areas.label_tag}}
-                {{form.areas}}
+                <label for="{{ form.areas.id_for_label }}" class="label-areas">
+                    {{ form.areas.label }}
+                </label>
+                {{ form.areas }}
+
                 {%for error in form.areas.errors%}
                     <p style="color: rgb(179, 0, 48);">{{error}}</p>
                 {%endfor%}

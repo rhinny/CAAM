@@ -22,7 +22,8 @@ class SeleccionForm(forms.Form):
         queryset=Area.objects.all(),
         widget= forms.CheckboxSelectMultiple,
         required=True,
-        label = "Selecciona al menos tres area de apoyo:")
+        label = "Selecciona al menos tres areas:")
+    
     
     def clean_areas(self):
         cantidad = self.cleaned_data.get('areas')

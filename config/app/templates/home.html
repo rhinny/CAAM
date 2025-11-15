@@ -8,14 +8,21 @@
 <div class="botones">
     <div class="card button-container">
         {% if usuario %}
-            <a href="{% url 'logout' %}">Cerrar sesión</a>
+            
+            <button onclick="window.location.href='{% url 'logout' %}'" class="logout-button">Cerrar sesión</button>
+
             <br>
             {% if persona.tipo == "ESTUDIANTE" %}
-                <a href="{% url 'perfil_estudiante' %}">Perfil</a>
+                
+                <button onclick="window.location.href='{% url 'perfil_estudiante' %}'" class="perfil-estudiante-button">Perfil</button>
+
             {% else %}
-                <a href="{% url 'elegir' %}">Agendar una cita</a>
+                
+                <button onclick="window.location.href='{% url 'elegir' %}'" class="agendar-button">Agendar una cita</button>
                 <br>
-                <a href="{% url 'mis_citas' %}">Mis citas</a>
+                
+                <button onclick="window.location.href='{% url 'mis_citas' %}'" class="mis-citas-button">Mis citas</button>
+
             {%endif%}
         {% else %}
             <button onclick="window.location.href='{% url 'registro' %}'" class="primary-button" id="boton-registro">Ir a registro</button>
