@@ -21,7 +21,7 @@ button:hover {
   background-color: hsl(239, 98%, 67%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
-  border-color: hsl(240, 73%, 93%);
+  border-color: hsl(0, 0%, 100%);
 }
 button:active {
   background-color: hsl(231, 58%, 33%);
@@ -29,7 +29,7 @@ button:active {
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 50ms;
-  border-color: hsl(240, 73%, 93%);
+  border-color: hsl(0, 0%, 100%);
 }
 .primary-button {
   width: 30vw;
@@ -44,6 +44,16 @@ button:active {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
+  background-image: url("images/signin.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
+}
+.primary-button:hover {
+  background-image: url("images/signin_white.png");
+}
+.primary-button:active {
+  background-image: url("images/signin_white.png");
 }
 .secondary-button {
   width: 30vw;
@@ -58,6 +68,16 @@ button:active {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
+  background-image: url("images/login.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
+}
+.secondary-button:hover {
+  background-image: url("images/login_white.png");
+}
+.secondary-button:active {
+  background-image: url("images/login_white.png");
 }
 .button-container {
   justify-content: center;
@@ -80,6 +100,16 @@ button:active {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
+  background-image: url("images/calendar.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
+}
+.agendar-button:hover {
+  background-image: url("images/calendar_white.png");
+}
+.agendar-button:active {
+  background-image: url("images/calendar_white.png");
 }
 .mis-citas-button {
   width: 25vw;
@@ -94,6 +124,16 @@ button:active {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
+  background-image: url("images/book.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
+}
+.mis-citas-button:hover {
+  background-image: url("images/book_white.png");
+}
+.mis-citas-button:active {
+  background-image: url("images/book_white.png");
 }
 .perfil-estudiante-button {
   width: 35vw;
@@ -108,6 +148,16 @@ button:active {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bolder;
   color: hsl(239, 98%, 67%);
+  background-image: url("images/profile.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
+}
+.perfil-estudiante-button:hover {
+  background-image: url("images/profile_white.png");
+}
+.perfil-estudiante-button:active {
+  background-image: url("images/profile_white.png");
 }
 .logout-button {
   width: 25vw;
@@ -124,12 +174,16 @@ button:active {
   color: hsl(357, 100%, 63%);
   border-color: hsl(357, 100%, 63%);
   background-color: hsl(352, 88%, 93%);
+  background-image: url("images/logout.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 17vw;
 }
 .logout-button:hover {
   background-color: hsl(357, 100%, 63%);
   color: hsl(0, 0%, 100%);
   box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
-  border-color: hsl(352, 88%, 93%);
+  background-image: url("images/logout_white.png");
 }
 .logout-button:active {
   background-color: hsl(355, 72%, 32%);
@@ -137,7 +191,7 @@ button:active {
   box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
   transform: translateY(5px);
   transition: 50ms;
-  border-color: hsl(352, 88%, 93%);
+  background-image: url("images/logout_white.png");
 }
 /*a*/
 a {
