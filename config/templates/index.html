@@ -64,10 +64,10 @@
             <img src="{%static 'css/images/logo1.png' %}" class="logo" alt="" srcset="">
         </div>
         <div class="indice">
-            <a href='{% url "home" %}'>inicio</a>
+            <a href='{% url "home" %}'>Inicio</a>
             {% if request.resolver_match.url_name == 'home' %}
                 <a href="#about">Sobre KAIROS</a>
-                <a href="#tutorial">video tutorial</a>
+                <a href="#tutorial">Video Tutorial</a>
             {% endif %}
         </div>
     </header>
