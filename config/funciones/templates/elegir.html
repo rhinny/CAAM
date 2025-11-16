@@ -10,26 +10,32 @@
 <ul>
 <!--   {%if lista%}--> 
         {% for estudiante, voluntario, areas_estudiante in lista %}
-        <li><h3>{{ estudiante.first_name }} {{ estudiante.last_name }}</h3>
-        {{ voluntario.descripcion }}
-        <br>
-        Estudiante del {{ estudiante.get_campus_display }}
-        <br>
-        Te puedo ayudar en: 
-        {% for area in areas_estudiante %} 
-        {% if area == areas_estudiante|last %}
-        {{ area }}. 
-        {% else %}
-        {{ area }},
-        {% endif %}
-        {% endfor %}
-        <br>
-        ¡En tu comuna!
-        <br>
-        <a href='{% url "agendar_citas" estudiante.rut %}'>Agendar Cita</a></li>
-        {% empty %}
-        {% endfor %}
-<!--    {%else%}-->
+        <li>
+            <div class="card mt-4 tu-perfil">
+                <h2 class="card-title"><b>{{ publi.titulo }}{{ estudiante.first_name }} {{ estudiante.last_name }}</b></h2>
+                {{ voluntario.descripcion }}
+                <br>
+                Estudiante del {{ estudiante.get_campus_display }}
+                <br>
+                <b>Te puedo ayudar en: </b>
+                {% for area in areas_estudiante %} 
+                {% if area == areas_estudiante|last %}
+                {{ area }}. 
+                {% else %}
+                {{ area }},
+                {% endif %}
+                {% endfor %}
+                <br>
+                ¡En tu comuna!
+                <br>
+                <br>
+                <a href='{% url "agendar_citas" estudiante.rut %}'>Agendar Cita</a>
+            </div>
+            <br>
+        </li>
+                {% empty %}
+                {% endfor %}
+        <!--    {%else%}-->
     <li>No hay voluntarios disponibles</li>
 <!--    {%endif%}-->
 </ul>

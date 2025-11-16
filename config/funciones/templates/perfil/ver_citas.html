@@ -7,16 +7,19 @@
     <ul class="list-group">
         {% for cita in citas %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-                <strong>Estudiante:</strong> {{ cita.estudiante.first_name }} {{ cita.estudiante.last_name }}<br>
-                <strong>Campus del Estudiante:</strong> {{ cita.estudiante.get_campus_display }}<br>
-                <strong>Fecha:</strong> {{ cita.fecha.fecha }}<br>
-                <strong>La comunicación es esencial!</strong><br>
-                 <strong>Contactate mediante:</strong> {{ cita.estudiante.email }}
+            <div class="card mt-4 tu-perfil">
+                <div>
+                    <h2 class="card-title"><b>{{ cita.estudiante.first_name }} {{ cita.estudiante.last_name }}</b></h2>
+                    <strong>Campus del Estudiante:</strong> {{ cita.estudiante.get_campus_display }}<br>
+                    <strong>Fecha:</strong> {{ cita.fecha.fecha }}<br>
+                    <strong>La comunicación es esencial!</strong><br>
+                    <strong>Contactate mediante:</strong> {{ cita.estudiante.email }}
+                </div>
+                <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
+                    <strong>Estado:</strong>
+                    {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
+                </span>
             </div>
-            <span class="badge {% if cita.esta_completada %}bg-success{% else %}bg-warning text-dark{% endif %}">
-                {% if cita.esta_completada %}Completada{% else %}Pendiente{% endif %}
-            </span>
         </li>
         <br>
         {% endfor %}
