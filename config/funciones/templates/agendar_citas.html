@@ -1,35 +1,36 @@
 {% extends "index.html" %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Perfil de {{ estudiante.first_name }} {{ estudiante.last_name }}</h2>
+    <h2>Estás agendando una cita con:</h2>
+    <div class="card mt-4 tu-perfil">
+        <h1 class="card-title"><b>{{ estudiante.first_name }} {{ estudiante.last_name }}</b></h1>
 
-    {% if publi %}
+        {% if publi %}
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="card-header"> <strong>Descripción:</strong> {{ publi.descripcion }}</div>
+                    <br>
+                </div>
+            </div>
+        {% endif %}
+
         <div class="card mt-3">
+            <div class="card-header"><strong>Áreas:</strong></div>
             <div class="card-body">
-                <h5 class="card-title">{{ publi.titulo }}</h5>
-                <p class="card-text">{{ publi.descripcion }}</p>
+                <ul class="list-group">
+                    {% for area in estudiante.areas.all %}
+                        <li class="list-group-item">{{ area.nombre }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
-    {% endif %}
 
-    <div class="card mt-3">
-        <div class="card-header">Áreas</div>
-        <div class="card-body">
-            <ul class="list-group">
-                {% for area in estudiante.areas.all %}
-                    <li class="list-group-item">{{ area.nombre }}</li>
-                {% endfor %}
-            </ul>
+        <div class="card mt-3">
+            <div class="card-header"> <strong>Comuna:</strong> {{ estudiante.comuna.nombre }}</div>
         </div>
-    </div>
-
-    <div class="card mt-3">
-        <div class="card-header"> <strong>Comuna:</strong> {{ estudiante.comuna.nombre }}</div>
-        </div>
-    </div>
-    <br>
-    <div class="card mt-3">
-        <div class="card-header"><strong>Campus Universitario:</strong> {{ estudiante.get_campus_display }}</div>
+        <br>
+        <div class="card mt-3">
+            <div class="card-header"><strong>Campus Universitario:</strong> {{ estudiante.get_campus_display }}</div>
         </div>
     </div>
 
