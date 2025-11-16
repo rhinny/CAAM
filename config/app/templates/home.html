@@ -1,5 +1,5 @@
 {%extends "index.html"%}
-
+{% load static %}
 {%block title%} KAIROS {%endblock%}
 
 
@@ -35,9 +35,26 @@
             <h1 class="texto-tutorial">Tutorial</h1>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/fcmYrba9ZXY?si=1fntBMvuZyjBYPv-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
-        <div class="card about-us" id="about">
-            <h1 class="about-us-title">Sobre nosotros</h1>
-            <h4 class="abut-us-text">Mediante incentivo académico y empatía, el equipo 6 Los Powercomputines plantea la opción a estudiantes que estén tomando electivos de convalidar esos créditos mediantes citas con adultos mayores que las necesiten en ciertas áreas de apoyo, a una distancia razonable, acomodando tanto al estudiante como al adulto mayor. Considerando y priorizando la comodidad del adulto mayor, nunca tratándolo como menos, reconociendo que son capaces de manera independiente pero al mismo tiempo dándoles la opción y posibilidad de pedir ayuda gratuita si así lo desean. </h4>
-        </div>
+        <div class="card about-us">
+            <h1 class="about-us-title">Sobre KAIROS</h1>
+            <div id="about">
+
+            </div>
+                <script>
+                    fetch("{% static 'about.json' %}")
+                        .then(response => response.json())
+                        .then(data => {
+                        const paragraphs = data.about.split("\n\n");
+                        const container = document.getElementById("about");
+
+                        paragraphs.forEach(p => {
+                            const para = document.createElement("p");
+                            para.textContent = p;
+                            container.appendChild(para);
+                        });
+                        })
+                        .catch(error => console.error("Error cargando el About Us:", error));
+                </script>           
+
 </body>
 {%endblock%}

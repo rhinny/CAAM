@@ -13,6 +13,8 @@
         <li><h3>{{ estudiante.first_name }} {{ estudiante.last_name }}</h3>
         {{ voluntario.descripcion }}
         <br>
+        Estudiante del {{ estudiante.get_campus_display }}
+        <br>
         Te puedo ayudar en: 
         {% for area in areas_estudiante %} 
         {% if area == areas_estudiante|last %}

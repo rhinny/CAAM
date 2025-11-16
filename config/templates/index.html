@@ -17,6 +17,46 @@
     <main>
         {%block content%}
         {%endblock%}
+        <h2>Selecciona texto y haz clic en el botón para escucharlo</h2>
+
+        <button onclick="speakSelection()">🎧 Leer selección</button>
+        <button onclick="stopSpeech()"> ❚❚ Detener</button>
+
+        <script>
+            let voices = [];
+
+            // Cargar voces disponibles
+            function loadVoices() {
+            voices = speechSynthesis.getVoices();
+            }
+            speechSynthesis.onvoiceschanged = loadVoices;
+
+            function speakSelection() {
+            const selectedText = window.getSelection().toString();
+
+            if (selectedText.trim() === "") {
+                alert("Por favor selecciona un texto primero.");
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(selectedText);
+
+            const spanishVoice = voices.find(v => v.lang.startsWith("es"));
+
+            if (spanishVoice) {
+                utterance.voice = spanishVoice;
+            }
+
+            utterance.rate = 1;
+            utterance.pitch = 1;
+
+            speechSynthesis.speak(utterance);
+            }
+
+            function stopSpeech() {
+            speechSynthesis.cancel();
+            }
+        </script>
     </main>
 
     <header class="header">
@@ -26,7 +66,7 @@
         <div class="indice">
             <a href='{% url "home" %}'>inicio</a>
             {% if request.resolver_match.url_name == 'home' %}
-                <a href="#about">sobre nosotros</a>
+                <a href="#about">Sobre KAIROS</a>
                 <a href="#tutorial">video tutorial</a>
             {% endif %}
         </div>
@@ -34,16 +74,3 @@
 
     
 </html>
-
-{%comment%}
-Aquí están los demás urls. Primero hay que crear las views y toda la cosa antes de
-poner estos botones pq me tiraba error de que no encontraba el login_adultoM y link_video o algo así.
-        <br>
-        <a href = "{%url 'registro_estudiante'%}" class="button">Soy estudiante</a>
-        <br>
-        <a href = "{%url 'registro_adultoM'%}" class="button">Soy adulto</a>
-        <br>
-        <a href = "{%url 'login_adultoM'%}" class="button">Soy adulto</a>
-        <br>
-        <a href = "{%url 'link_video'%}" class="button">Video tutorial</a>
-{%endcomment%}
