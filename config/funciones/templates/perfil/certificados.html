@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificado</title>
+    <title>Estado del certificado</title>
 </head>
-<body>
-    <h1>Aquí se ve el estado del certificado</h1>
-    <ul>
-        <li>Si cumple con citas: botón imprimir certificado</li>
-        <li>Si NO cumple con citas aún: "Su certificado aún no está disponible"</li>
-    </ul>
+<body style="text-align: center; font-family: Helvetica, Arial, sans-serif; margin-top: 50px;">
+
+    <h1>Estado del certificado</h1>
+    
+    {% if tiene_certificado %}
+        <p style="color: green; font-size: 18px;">
+            ¡Felicidades! Has completado tus {{total_citas}} citas asignadas 🎉
+        </p>
+        <a href="{% url 'crear_pdf' %}" target="_blank" class="btn btn-success"
+            style="padding: 10px 20px; background-color: #28a745; color: white; border-radius: 5px; text-decoration: none;">
+            📄 Descargar Certificado en PDF
+        </a>
+    {% else %}
+        <p style="color: red; font-size: 16px;">
+            Aún no cumples con las 8 citas necesarias para obtener tu certificado.
+        </p>
+        <p style="font-size: 14px;">
+            Llevas {{total_citas}} de 8 citas completadas.
+        </p>
+    {% endif %}
 </body>
 </html>

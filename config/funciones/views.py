@@ -8,6 +8,11 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from app.forms import *
 from app.models import *
+from .pdfcreate import crear_pdf #pdfcreate
+from django.utils import timezone
+from django.shortcuts import render, redirect
+from django.utils import timezone
+from funciones.models import Cita
 
 # Create your views here.
 
@@ -103,6 +108,7 @@ def fechas_usuario(request):
 
 
 @login_required
+
 def perfil_estudiante(request):
     usuario = request.user
     if not usuario.es_estudiante():
@@ -110,13 +116,20 @@ def perfil_estudiante(request):
     publi = Publi.objects.filter(usuario=usuario).first()
     fechas = FechasDisponibles.objects.filter(usuario=usuario).order_by("fecha")
     citas = Cita.objects.filter(estudiante=usuario).select_related("adulto_mayor", "fecha")
+
+    #Contar cuantas citas ya fueron completadas
+    total_citas_cumplidas = sum(1 for cita in citas if cita.fecha.fecha < timezone.now().date())
+    tiene_certificado = total_citas_cumplidas >= 8
     tipo = "adulto" if usuario.es_adulto_mayor() else "estudiante"
+    
     return render(request, "perfil/perfil_estudiante.html", {
         "publi": publi,
         "fechas": fechas,
         "usuario": usuario,
         "citas": citas,
-        "tipo":tipo,})
+        "tipo":tipo,
+        "tiene_certificado": tiene_certificado,
+        })
 
 #función para que muestre los perfiles de los estudiantes a los adultos mayores
 #filtro por áreas y comuna
@@ -228,5 +241,23 @@ def ver_citas(request):
 
 #cuando se cumplan cierta cantidad de citas el estudiante puede imprimir un certificado
 def certificados(request):
-    #...
-    return render(request, "perfil/certificados.html")
+    usuario = request.user
+
+    #Verificar que el usuario esté autenticado
+    if not usuario.is_authenticated:
+        return redirect('login')
+    #Obtener todas las citas del usuario
+    citas_usuario = Cita.objects.filter(estudiante=usuario)
+    #Contar solo las que ya se cumplieron
+    total_citas_cumplidas = sum(
+        1 for cita in citas_usuario if cita.esta_completada()
+        )
+    #Verificar si ya puede obtener el certificado
+    tiene_certificado = total_citas_cumplidas >= 8
+
+    context = {
+        "tiene_certificado": tiene_certificado,
+        "total_citas": total_citas_cumplidas
+    }
+    
+    return render(request, "perfil/certificados.html", context)

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .pdfcreate import crear_pdf #pdfcreate
 
 urlpatterns = [path('calendario/', views.calendario, name="calendario"),
                path('guardar_fechas/', views.guardar_fechas, name="guardar_fechas"),
@@ -12,4 +13,5 @@ urlpatterns = [path('calendario/', views.calendario, name="calendario"),
                path('agendar_citas/<str:estudiante_id>', views.agendar_citas, name='agendar_citas'),
                path('citas/', views.mis_citas, name='mis_citas'),
                path('certificado/', views.certificados, name='certificados'),
+               path('certificado/pdf/', views.crear_pdf, name='crear_pdf'),
                ]

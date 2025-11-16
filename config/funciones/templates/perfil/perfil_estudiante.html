@@ -91,6 +91,29 @@
                 <p>No tienes citas agendadas aún.</p>
                 {% endif %}
             </div>
+            
+            <!--Boton del certificado-->
+            <div class="text-center mt-3 mb-4">
+                {% if tiene_certificado %}
+                    <a href="{% url 'certificados' %}" 
+                        class="btn btn-success"
+                        style="
+                            padding: 10px 20px;
+                            background-color: blue;
+                            color: white;
+                            border-radius: 5px;
+                            text-decoration: none;
+                            font-weight: bold;
+                        ">
+                        🎓 Ver estado del certificado
+                    </a>
+                {% else %}
+                    <p style="color: gray; margin-top: 15px;">
+                        Aún no cumples con las 8 citas necesarias para obtener tu certificado.
+                    </p>
+                {% endif %}
+            </div>
+
             <!--Ver fechas-->
             <div class="card mb-4">
                 <div class="card-header">Fechas disponibles</div>
