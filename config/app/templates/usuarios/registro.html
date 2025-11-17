@@ -5,11 +5,11 @@
 {% block content %}
     <h1 class="form-title">Crea tu cuenta</h1>
     <div class="formulario">
-        <form action="/usuarios/registro/" method="post">
-            {% csrf_token %}
-            {{ adicional_form }}
-            {{ form }}
-            <button class="form-submit">Crear</button>
-        </form>
+            <form action="/usuarios/registro/" method="post">
+                {% csrf_token %}
+                {{ adicional_form }}
+                {{ form }}
+                <button class="form-submit">Crear</button>
+            </form>
     </div>
 {% endblock %}
