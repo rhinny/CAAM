@@ -317,6 +317,20 @@ main {
   margin-top: 0vw;
   z-index: 10;
 }
+.tts {
+  position: fixed;
+  bottom: 2vw;
+  left: 2vw;
+  z-index: 10;
+}
+.texto-tts {
+  text-shadow: 
+  -2px -2px 0 white,
+  2px -2px 0 white,
+  -2px 2px 0 white,
+  2px 2px 0 white;
+  z-index: 10;
+}
 .formulario {
   justify-content: center;
   display:flex;

@@ -11,18 +11,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%} KAIROS {%endblock%}</title>
-    <link rel="icon" href="{% static 'logo.png' %}" type="image/png">
+    <link rel="icon" sizes="32x32" href="{% static 'css/images/favicon.ico' %}">
 
 </head>
 <body>
     <main>
         {%block content%}
         {%endblock%}
-        <h2>Selecciona texto y haz clic en el botón para escucharlo</h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="tts">
+            <h2 class="texto-tts">Selecciona texto y haz clic en el botón para escucharlo</h2>
 
-        <button class="publish-btn" onclick="speakSelection()">🎧 Leer selección</button>
-        <button class="publish-btn" onclick="stopSpeech()"> ❚❚ Detener</button>
-
+            <button class="publish-btn" onclick="speakSelection()">🎧 Leer selección</button>
+            <button class="publish-btn" onclick="stopSpeech()"> ❚❚ Detener</button>
+        </div>
         <script>
             let voices = [];
 
